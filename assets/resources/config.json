@@ -1,0 +1,28 @@
+{
+    "config": {
+        "version": "",
+        "package": "",
+        "localDataKey": "",
+        "localDataIv": "",
+        "httpServer": "",
+        "httpTimeout": 10000,
+        "frameRate": 60
+    },
+    "language": {
+        "type": [
+            "zh",
+            "en"
+        ],
+        "path": {
+            "json": "language/json",
+            "texture": "language/texture",
+            "spine": ""
+        }
+    },
+    "bundle": {
+        "enable": false,
+        "server": "",
+        "name": "",
+        "version": ""
+    }
+}
