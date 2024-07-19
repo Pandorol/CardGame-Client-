@@ -2,6 +2,7 @@ import { _decorator, Component, director, JsonAsset, Node } from 'cc';
 import { oops } from './Oops';
 import { resLoader } from './common/loader/ResLoader';
 import { GUI } from './gui/GUI';
+import { LayerManager } from './gui/layer/LayerManager';
 const { ccclass, property } = _decorator;
 
 
@@ -42,6 +43,9 @@ export class Root extends Component {
         const config = await oops.res.loadAsync(config_name, JsonAsset);
         if (config) {
 
+
+            // 游戏界面管理
+            oops.gui = new LayerManager(this.gui);
 
 
             this.enabled = true;
