@@ -1,11 +1,4 @@
 import { TTFFont } from "cc";
-
-/*
- * @Author: dgflash
- * @Date: 2022-02-11 09:31:52
- * @LastEditors: dgflash
- * @LastEditTime: 2023-08-22 16:37:40
- */
 export class LanguageData {
     /** JSON资源目录 */
     static path_json: string = "language/json";
