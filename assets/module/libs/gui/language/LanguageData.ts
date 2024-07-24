@@ -16,17 +16,7 @@ export class LanguageData {
     /** TTF字体 */
     static font: TTFFont = null!;
 
-    /** 
-     * 通过多语言关键字获取语言文本 
-     * 
-     * 注：
-     * 
-     * 1、先获取language/json中的配置数据，如果没有者获取config/game/Language配置表中的多语言数据
-     * 
-     * 2、config/game/Language配置表可选使用，不用时不创建同名配置表即可
-     * 
-     * 3、config/game/Language配置表使用oops-plugin-excel-to-json插件生成，点击项目根目录下载update-oops-plugin-framework.bat或update-oops-plugin-framework.sh脚本下载插件
-     */
+
     public static getLangByID(labId: string): string {
         var text = this.json[labId];
         if (text) {

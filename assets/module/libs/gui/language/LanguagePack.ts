@@ -85,6 +85,7 @@ export class LanguagePack {
             if (jsonAsset) {
                 LanguageData.json = jsonAsset.json;
                 Logger.logConfig(path, "下载语言包 json 资源");
+                Logger.logConfig(LanguageData.json, "LanguageData.json=");
             }
             else {
                 resolve(null);

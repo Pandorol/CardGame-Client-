@@ -6,9 +6,7 @@ import { LayerDialog } from "./LayerDialog";
 import { LayerNotify } from "./LayerNotify";
 import { LayerPopUp } from "./LayerPopup";
 import { LayerUI } from "./LayerUI";
-
-
-
+import { UIMap } from "./UIMap";
 
 /** 界面层类型 */
 export enum LayerType {
@@ -27,6 +25,7 @@ export enum LayerType {
     /** 新手引导层 */
     Guide = "LayerGuide"
 }
+
 /** 
  * 界面配置结构体
  * @example
@@ -61,6 +60,7 @@ export interface UIConfig {
     /** 是否打开窗口后显示背景遮罩 */
     mask?: boolean;
 }
+
 /** 界面层级管理器 */
 export class LayerManager {
     /** 界面根节点 */
@@ -72,7 +72,7 @@ export class LayerManager {
     /** 新手引导层 */
     guide!: Node;
     /** 界面地图 */
-    //uiMap!: UIMap;
+    uiMap!: UIMap;
 
     /** 界面层 */
     private ui!: LayerUI;
@@ -129,32 +129,34 @@ export class LayerManager {
     setConfig(uiId: number, config: UIConfig): void {
         this.configs[uiId] = config;
     }
+
     /**
      * 设置界面地图配置
      * @param data 界面地图数据
      */
-    // setUIMap(data: any) {
-    //     if (this.uiMap == null) {
-    //         this.uiMap = new UIMap();
-    //     }
-    //     this.uiMap.init(this, data);
-    // }
+    setUIMap(data: any) {
+        if (this.uiMap == null) {
+            this.uiMap = new UIMap();
+        }
+        this.uiMap.init(this, data);
+    }
+
     /**
-         * 同步打开一个窗口
-         * @param uiId          窗口唯一编号
-         * @param uiArgs        窗口参数
-         * @param callbacks     回调对象
-         * @example
-        var uic: UICallbacks = {
-            onAdded: (node: Node, params: any) => {
-                var comp = node.getComponent(LoadingViewComp) as ecs.Comp;
-            }
-            onRemoved:(node: Node | null, params: any) => {
-                        
-            }
-        };
-        oops.gui.open(UIID.Loading, null, uic);
-         */
+     * 同步打开一个窗口
+     * @param uiId          窗口唯一编号
+     * @param uiArgs        窗口参数
+     * @param callbacks     回调对象
+     * @example
+    var uic: UICallbacks = {
+        onAdded: (node: Node, params: any) => {
+            var comp = node.getComponent(LoadingViewComp) as ecs.Comp;
+        }
+        onRemoved:(node: Node | null, params: any) => {
+                    
+        }
+    };
+    oops.gui.open(UIID.Loading, null, uic);
+     */
     open(uiId: number, uiArgs: any = null, callbacks?: UICallbacks): void {
         var config = this.configs[uiId];
         if (config == null) {
@@ -410,6 +412,4 @@ export class LayerManager {
         w.enabled = true;
         return node;
     }
-
-
 }

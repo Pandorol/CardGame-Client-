@@ -1,9 +1,4 @@
-/*
- * @Author: dgflash
- * @Date: 2022-08-15 10:06:47
- * @LastEditors: dgflash
- * @LastEditTime: 2022-09-02 13:44:12
- */
+
 import { BlockInputEvents, Layers, Node, Widget, find, instantiate } from "cc";
 import { ViewUtil } from "../../utils/ViewUtil";
 import { Notify } from "../prompt/Notify";
@@ -88,7 +83,7 @@ export class LayerNotify extends Node {
             }
         }
         catch {
-            console.error("从oops-game-kit项目中拷贝 assets/bundle/common/prefab/notify.prefab 与 assets/bundle/common/anim/notify.anim 覆盖到本项目中");
+            console.error("");
         }
     }
 }
