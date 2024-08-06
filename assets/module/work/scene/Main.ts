@@ -10,8 +10,8 @@ export class Main extends Root {
         if (DEBUG) profiler.showStats();
 
         oops.language.setLanguage("zh", () => {
-            oops.res.loadDir("common", () => {
-
+            oops.res.loadDir("common", () => {//加载resources/common的加载动画提示消息组件
+                oops.gui.toast("加载组件完成");
             });
         });
 
