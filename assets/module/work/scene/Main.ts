@@ -8,7 +8,13 @@ const { ccclass, property } = _decorator;
 export class Main extends Root {
     start() {
         if (DEBUG) profiler.showStats();
-        oops.language.setLanguage("zh", () => { });
+
+        oops.language.setLanguage("zh", () => {
+            oops.res.loadDir("common", () => {
+
+            });
+        });
+
     }
 
     update(deltaTime: number) {

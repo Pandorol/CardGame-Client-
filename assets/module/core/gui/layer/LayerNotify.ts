@@ -58,32 +58,30 @@ export class LayerNotify extends Node {
      * @param useI18n 是否使用多语言
      */
     toast(content: string, useI18n: boolean): void {
-        try {
-            if (this.notify == null) {
-                this.notify = ViewUtil.createPrefabNode(ToastPrefabPath);
-                this.notifyItem = find("item", this.notify)!;
-                this.notifyItem.parent = null;
-            }
 
-            this.notify.parent = this;
-            let childNode = instantiate(this.notifyItem);
-            let toastCom = childNode.getChildByName("prompt")!.getComponent(Notify)!;
-            childNode.parent = this.notify;
-
-            toastCom.onComplete = () => {
-                if (this.notify.children.length == 0) {
-                    this.notify.parent = null;
-                }
-            };
-            toastCom.toast(content, useI18n);
-
-            // 超过3个提示，就施放第一个提示
-            if (this.notify.children.length > 3) {
-                this.notify.children[0].destroy();
-            }
+        if (this.notify == null) {
+            this.notify = ViewUtil.createPrefabNode(ToastPrefabPath);
+            this.notifyItem = find("item", this.notify)!;
+            this.notifyItem.parent = null;
         }
-        catch {
-            console.error("");
+
+        this.notify.parent = this;
+        let childNode = instantiate(this.notifyItem);
+        let toastCom = childNode.getChildByName("prompt")!.getComponent(Notify)!;
+        childNode.parent = this.notify;
+
+        toastCom.onComplete = () => {
+            if (this.notify.children.length == 0) {
+                this.notify.parent = null;
+            }
+        };
+        toastCom.toast(content, useI18n);
+
+        // 超过3个提示，就施放第一个提示
+        if (this.notify.children.length > 3) {
+            this.notify.children[0].destroy();
         }
+
+
     }
 }
