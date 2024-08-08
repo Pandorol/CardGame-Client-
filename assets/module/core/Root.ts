@@ -6,6 +6,7 @@ import { message } from './common/event/MessageManager';
 import { resLoader } from './common/loader/ResLoader';
 import { StorageManager } from "./common/storage/StorageManager";
 import { TimerManager } from './common/timer/TimerManager';
+import { GameManager } from './game/GameManager';
 import { GUI } from './gui/GUI';
 import { LayerManager } from './gui/layer/LayerManager';
 const { ccclass, property } = _decorator;
@@ -67,7 +68,7 @@ export class Root extends Component {
             oops.timer = this.persistRootNode.addComponent(TimerManager)!;
 
             // 游戏场景管理
-            //oops.game = new GameManager(this.game);
+            oops.game = new GameManager(this.game);
 
             // 游戏界面管理
             oops.gui = new LayerManager(this.gui);

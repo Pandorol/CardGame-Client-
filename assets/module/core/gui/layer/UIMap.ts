@@ -4,6 +4,7 @@ import { LayerManager } from "./LayerManager";
 /** 界面关系树节点 */
 class TreeNode {
     id!: number;
+
     /** 父节点编号 */
     pid!: number;
     /** 父节点 */

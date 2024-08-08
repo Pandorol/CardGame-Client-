@@ -1,12 +1,12 @@
 
-import { _decorator, Component, Label, Node, ProgressBar, RichText } from 'cc';
+import { _decorator, Component, Label, Node, ProgressBar } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('UpdatePanel')
 export class UpdatePanel extends Component {
 
-    @property(RichText)
-    info: RichText = null!;
+    @property(Label)
+    info: Label = null!;
 
     @property(ProgressBar)
     fileProgress: ProgressBar = null!;

@@ -1,12 +1,14 @@
 import { DEBUG } from "cc/env";
 
 import { LanguageManager } from "../libs/gui/language/Language";
+import { HttpRequest } from "../libs/network/HttpRequest";
 import { AudioManager } from "./common/audio/AudioManager";
 import { MessageManager } from "./common/event/MessageManager";
 import { ResLoader } from "./common/loader/ResLoader";
 import { Logger } from "./common/log/Logger";
 import { StorageManager } from "./common/storage/StorageManager";
 import { TimerManager } from "./common/timer/TimerManager";
+import { GameManager } from "./game/GameManager";
 import { LayerManager } from "./gui/layer/LayerManager";
 export class oops {
     /** ----------核心模块---------- */
@@ -24,12 +26,14 @@ export class oops {
     static timer: TimerManager;
     /** 全局消息 */
     static message: MessageManager;
+    static game: GameManager;
     /** ----------可选模块---------- */
 
     /** 多语言模块 */
     static language: LanguageManager = new LanguageManager();
 
-
+    /** HTTP */
+    static http: HttpRequest = new HttpRequest();
 
 }
 // 引入oops全局变量以方便调试
