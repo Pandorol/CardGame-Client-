@@ -32,7 +32,6 @@ export class ChatMessageMgr {
         o.time = StringUtil.format(new Date(), "yyyy-MM-dd hh:mm")
         this._allmessages.push(o)
         oops.message.dispatchEvent(Cmd.ChatMsgAdded.toString())
-        oops.log.logBusiness(this._allmessages)
     }
     StoragePrase() {
         let all = []

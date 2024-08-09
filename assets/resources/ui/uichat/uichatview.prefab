@@ -31,14 +31,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 71
+        "__id__": 72
       },
       {
-        "__id__": 73
+        "__id__": 74
       }
     ],
     "_prefab": {
-      "__id__": 75
+      "__id__": 76
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -1327,12 +1327,12 @@
       }
     ],
     "_prefab": {
-      "__id__": 70
+      "__id__": 71
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -30.314,
-      "y": -893.112,
+      "x": -110.346,
+      "y": -863.6265,
       "z": 0
     },
     "_lrot": {
@@ -1531,8 +1531,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 40
+      "width": 260.06399999999996,
+      "height": 98.971
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1602,7 +1602,11 @@
     "__prefab": {
       "__id__": 69
     },
-    "clickEvents": [],
+    "clickEvents": [
+      {
+        "__id__": 70
+      }
+    ],
     "_interactable": true,
     "_transition": 2,
     "_normalColor": {
@@ -1661,6 +1665,16 @@
     "fileId": "21OitmtPVH362bEK7Vgvb3"
   },
   {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 1
+    },
+    "component": "",
+    "_componentId": "40adeQx3sdDRIf8pbfafY5h",
+    "handler": "onClickEmit",
+    "customEventData": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -1683,7 +1697,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 72
+      "__id__": 73
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -1711,10 +1725,13 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 74
+      "__id__": 75
     },
     "list": {
       "__id__": 31
+    },
+    "editmessage": {
+      "__id__": 54
     },
     "_id": ""
   },
