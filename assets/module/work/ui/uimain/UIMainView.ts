@@ -3,11 +3,11 @@ import { oops } from '../../../core/Oops';
 import { UIID } from '../UIConfig';
 const { ccclass, property } = _decorator;
 
-@ccclass('UILoginView')
-export class UILoginView extends Component {
+@ccclass('UIMainView')
+export class UIMainView extends Component {
     start() {
-        oops.gui.open(UIID.Main)
-        oops.gui.removeByNode(this.node)
+
+        oops.gui.open(UIID.Chat)
     }
 
     update(deltaTime: number) {

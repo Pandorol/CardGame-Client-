@@ -1,6 +1,6 @@
-
 import { Logger } from "../../core/common/log/Logger";
 import { ISocket, MessageFunc, NetData } from "./NetInterface";
+
 
 type Connected = (event: any) => void;
 
@@ -12,7 +12,6 @@ type Connected = (event: any) => void;
  */
 export class WebSock implements ISocket {
     private _ws: WebSocket | null = null;              // websocket对象
-
     /** 网络连接成功事件 */
     onConnected: ((this: WebSocket, ev: Event) => any) | null = null;
     /** 接受到网络数据事件 */
@@ -41,8 +40,7 @@ export class WebSock implements ISocket {
             let protocol = options.protocol;
             url = `${protocol}://${ip}:${port}`;
         }
-
-        this._ws = new WebSocket(url);
+        this._ws = new WebSocket(url);//io(url)
         this._ws.binaryType = options.binaryType ? options.binaryType : "arraybuffer";
         this._ws.onmessage = (event) => {
             let onMessage: MessageFunc = this.onMessage!;
@@ -52,6 +50,31 @@ export class WebSock implements ISocket {
         this._ws.onerror = this.onError;
         this._ws.onclose = this.onClosed;
         return true;
+
+
+        // let url = null;
+        // if (options.url) {
+        //     url = options.url;
+        // }
+        // else {
+        //     let ip = options.ip;
+        //     let port = options.port;
+        //     let protocol = options.protocol;
+        //     url = `${protocol}://${ip}:${port}`;
+        // }
+        // this._sio = io(url)
+        // this._sio.on("connect", () => {
+        //     Logger.logNet(this._sio.id);
+        // });
+
+        // this._sio.on("disconnect", () => {
+        //     Logger.logNet(this._sio.id);
+        // });
+        // this._sio.on('new message', (data) => {
+        //     Logger.logNet(data);
+        // });
+
+        // return true;
     }
 
     /**

@@ -22,6 +22,7 @@ export class UIHotUpView extends Component {
 
     start() {
         if (!sys.isNative) {
+            this.onClickGotoLogin();
             return;
         }
 

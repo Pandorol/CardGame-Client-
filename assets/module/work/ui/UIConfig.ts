@@ -10,6 +10,8 @@ export enum UIID {
     Netinstable,
     HotUp,
     Login,
+    Main,
+    Chat,
 }
 
 /** 打开界面方式的配置数据 */
@@ -19,4 +21,7 @@ export var UIConfigData: { [key: number]: UIConfig } = {
     [UIID.Window]: { layer: LayerType.Dialog, prefab: "common/prefab/window" },
     [UIID.HotUp]: { layer: LayerType.UI, prefab: "ui/uihotup/uihotupview" },
     [UIID.Login]: { layer: LayerType.UI, prefab: "ui/uilogin/uiloginview" },
+    [UIID.Main]: { layer: LayerType.UI, prefab: "ui/uimain/uimainview" },
+    [UIID.Chat]: { layer: LayerType.UI, prefab: "ui/uichat/uichatview" },
+
 }

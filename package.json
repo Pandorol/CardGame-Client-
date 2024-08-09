@@ -1,10 +1,11 @@
 {
-  "name": "protest",
-  "uuid": "9a816ccd-9d16-46be-8006-df8f4abf8139",
-  "creator": {
-    "version": "3.8.3"
-  },
-  "dependencies": {
-    "crypto-es": "^2.1.0"
-  }
+    "name": "protest",
+    "uuid": "9a816ccd-9d16-46be-8006-df8f4abf8139",
+    "creator": {
+        "version": "3.8.3"
+    },
+    "dependencies": {
+        "socket.io-client": "^4.7.5",
+        "crypto-es": "^2.1.0"
+    }
 }

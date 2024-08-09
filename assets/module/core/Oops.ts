@@ -2,6 +2,7 @@ import { DEBUG } from "cc/env";
 
 import { LanguageManager } from "../libs/gui/language/Language";
 import { HttpRequest } from "../libs/network/HttpRequest";
+import { NetManager } from "../libs/network/NetManager";
 import { AudioManager } from "./common/audio/AudioManager";
 import { MessageManager } from "./common/event/MessageManager";
 import { ResLoader } from "./common/loader/ResLoader";
@@ -34,6 +35,8 @@ export class oops {
 
     /** HTTP */
     static http: HttpRequest = new HttpRequest();
+    /** WebSocket */
+    static tcp: NetManager = new NetManager();
 
 }
 // 引入oops全局变量以方便调试
