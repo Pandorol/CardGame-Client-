@@ -51,30 +51,6 @@ export class WebSock implements ISocket {
         this._ws.onclose = this.onClosed;
         return true;
 
-
-        // let url = null;
-        // if (options.url) {
-        //     url = options.url;
-        // }
-        // else {
-        //     let ip = options.ip;
-        //     let port = options.port;
-        //     let protocol = options.protocol;
-        //     url = `${protocol}://${ip}:${port}`;
-        // }
-        // this._sio = io(url)
-        // this._sio.on("connect", () => {
-        //     Logger.logNet(this._sio.id);
-        // });
-
-        // this._sio.on("disconnect", () => {
-        //     Logger.logNet(this._sio.id);
-        // });
-        // this._sio.on('new message', (data) => {
-        //     Logger.logNet(data);
-        // });
-
-        // return true;
     }
 
     /**

@@ -1,22 +1,11 @@
 import { Socket } from "socket.io-client";
 import io from "socket.io-client/dist/socket.io.js";
 import { Logger } from "../../core/common/log/Logger";
-import { ISocket, MessageFunc, NetData, SocketFunc } from "./NetInterface";
-
-export class WebSocketIO implements ISocket {
+import { MessageFunc, NetData } from "./NetInterface";
+export class WebSimpleIO {
     private _sio: Socket | null = null;
-    onConnected: SocketFunc;
-    onMessage: MessageFunc;
-    onError: SocketFunc;
-    onClosed: SocketFunc;
-    send(buffer: NetData): number {
-        this._sio.send(buffer);
-        throw new Error("Method not implemented.");
-    }
-    close(code?: number, reason?: string): void {
-        this._sio.disconnect();
-    }
-
+    /** 接受到网络数据事件 */
+    onMessage: MessageFunc | null = null;
     connect(options: any) {
         let url = null;
         if (options.url) {
@@ -30,12 +19,10 @@ export class WebSocketIO implements ISocket {
         }
         this._sio = io(url)
         this._sio.on("connect", () => {
-            Logger.logNet(this._sio.id);
-            this.onConnected.call(null)
+            Logger.logNet("connect:sid=" + this._sio.id);
         });
         this._sio.on("connect_error", (reason) => {
             Logger.logNet(reason);
-            this.onError.call(null, reason);
         });
         this._sio.on("disconnect", (reason) => {
             Logger.logNet(reason);
@@ -44,9 +31,20 @@ export class WebSocketIO implements ISocket {
 
             }
             else {
-                this.onClosed.call(null, reason);
+
             }
+        });
+        this._sio.on("message", (msg) => {
+            this.onMessage.call(null, msg);
         });
         return true;
     }
+    close() {
+        this._sio.disconnect();
+    }
+
+    send(buffer: NetData, msgid = "message") {
+        this._sio.emit(msgid, buffer)
+    }
+
 }

@@ -84,3 +84,10 @@ export interface INetworkTips {
     requestTips(isShow: boolean): void;
     responseErrorCode(code: number): void;
 }
+/** 网络连接参数 */
+export interface NetSimpleConnectOptions {
+    protocol?: string,
+    ip?: string,              // 地址
+    port?: number,              // 端口
+    url?: string,               // url，与地址+端口二选一
+}

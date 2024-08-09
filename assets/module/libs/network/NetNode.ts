@@ -342,7 +342,7 @@ export class NetNode {
         return true;
     }
 
-    private base_request(reqProtocol: IRequestProtocol, rspCmd: string, rspObject: CallbackObject, showTips: boolean = true, force: boolean = false) {
+    protected base_request(reqProtocol: IRequestProtocol, rspCmd: string, rspObject: CallbackObject, showTips: boolean = true, force: boolean = false) {
         var buf: NetData = JSON.stringify(reqProtocol);         // 转为二进制流发送
 
         if (this._state == NetNodeState.Working || force) {
