@@ -2,9 +2,9 @@
     "config": {
         "version": "",
         "package": "",
-        "localDataKey": "",
-        "localDataIv": "",
-        "httpServer": "",
+        "localDataKey": "aa",
+        "localDataIv": "bb",
+        "httpServer": "192.168.3.22",
         "httpTimeout": 10000,
         "frameRate": 60
     },
@@ -16,7 +16,7 @@
         "path": {
             "json": "language/json",
             "texture": "language/texture",
-            "spine": ""
+            "spine": "language/spine"
         }
     },
     "bundle": {

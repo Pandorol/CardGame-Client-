@@ -1,9 +1,9 @@
 import { _decorator, Component, EditBox, Label } from 'cc';
 import { oops } from '../../../core/Oops';
 import List from '../../../core/utils/List';
+import { EventMessage_work } from '../../event/EventMessage_work';
 import { chatmgr } from '../../modules/chat/ChatDatas';
 import { NetChannelType } from '../../net/NetChannelManager';
-import { Cmd } from '../../net/NetListener';
 const { ccclass, property } = _decorator;
 
 @ccclass('UIChatView')
@@ -17,7 +17,7 @@ export class UIChatView extends Component {
 
 
         this.list.numItems = chatmgr.allmessages.length;
-        oops.message.on(Cmd.ChatMsgAdded.toString(), this.ChatMsgAddded, this)
+        oops.message.on(EventMessage_work.ChatMsgAdded, this.ChatMsgAddded, this)
     }
     ChatMsgAddded() {
         this.list.numItems = chatmgr.allmessages.length;

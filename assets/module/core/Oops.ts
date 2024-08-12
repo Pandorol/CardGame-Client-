@@ -17,6 +17,7 @@ export class oops {
     /** 日志管理 */
     static log = Logger;
     static res: ResLoader;
+    static config;
     /** 二维界面管理 */
     static gui: LayerManager;
     /** 本地存储 */

@@ -1,10 +1,10 @@
 import { oops } from '../../core/Oops';
+import { EventMessage_work } from '../event/EventMessage_work';
 
 
 export enum Cmd {
     test1 = 1,
     ChatMsg = 2,
-    ChatMsgAdded = 3,
 }
 export class ChatNetListener {
     onMessage(msg) {
@@ -15,7 +15,7 @@ export class ChatNetListener {
                 oops.message.dispatchEvent(cmd + '', msg)
                 break;
             case Cmd.ChatMsg:
-                oops.message.dispatchEvent('' + cmd, msg)
+                oops.message.dispatchEvent(EventMessage_work.RecvChatMsg, msg)
                 break;
             default:
                 break;

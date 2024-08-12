@@ -1,6 +1,6 @@
 import { oops } from '../../../core/Oops';
 import { StringUtil } from "../../../core/utils/StringUtil";
-import { Cmd } from "../../net/NetListener";
+import { EventMessage_work } from '../../event/EventMessage_work';
 import { StorageKeys } from '../storage/StorageKeys';
 
 export class OneChatMessage {
@@ -22,7 +22,7 @@ export class ChatMessageMgr {
     init() {
         this._allmessages = this.StoragePrase()
 
-        oops.message.on(Cmd.ChatMsg.toString(), this.RecvMsg, this)
+        oops.message.on(EventMessage_work.RecvChatMsg, this.RecvMsg, this)
     }
     RecvMsg(cmd, msg) {
         let o = new OneChatMessage()
@@ -31,7 +31,7 @@ export class ChatMessageMgr {
         o.message = msg.message ? msg.message : ''
         o.time = StringUtil.format(new Date(), "yyyy-MM-dd hh:mm")
         this._allmessages.push(o)
-        oops.message.dispatchEvent(Cmd.ChatMsgAdded.toString())
+        oops.message.dispatchEvent(EventMessage_work.ChatMsgAdded.toString())
     }
     StoragePrase() {
         let all = []

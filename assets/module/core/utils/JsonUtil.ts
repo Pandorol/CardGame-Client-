@@ -3,7 +3,7 @@ import { JsonAsset } from "cc";
 import { resLoader } from "../common/loader/ResLoader";
 
 /** 资源路径 */
-var path: string = "config/game/";
+var path: string = "excelconfig/";
 
 /** 数据缓存 */
 var data: Map<string, any> = new Map();

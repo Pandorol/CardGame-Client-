@@ -1,4 +1,5 @@
 import { _decorator, Component, director, game, JsonAsset, Node } from 'cc';
+import { Config } from '../config/Config';
 import { oops } from './Oops';
 import { AudioManager } from './common/audio/AudioManager';
 import { EventMessage } from './common/event/EventMessage';
@@ -47,15 +48,14 @@ export class Root extends Component {
 
         const config_name = "config";
         const config = await oops.res.loadAsync(config_name, JsonAsset);
+
         if (config) {
-            // oops.config.btc = new BuildTimeConstants();
-            // oops.config.query = new GameQueryConfig();
-            // oops.config.game = new GameConfig(config);
+
+            oops.config = new Config(config);
 
             // // 本地存储模块
             oops.storage = new StorageManager();
-            oops.storage.init("a", "b");
-            //oops.storage.init(oops.config.game.localDataKey, oops.config.game.localDataIv);      // 初始化本地存储加密
+            oops.storage.init(oops.config.localDataKey, oops.config.localDataIv);     // 初始化本地存储加密
 
             // 全局消息
             oops.message = message;
@@ -73,11 +73,11 @@ export class Root extends Component {
             // 游戏界面管理
             oops.gui = new LayerManager(this.gui);
 
-            // 网络模块
-            // oops.http.server = oops.config.game.httpServer;                                      // Http 服务器地址
-            // oops.http.timeout = oops.config.game.httpTimeout;                                    // Http 请求超时时间
+            //网络模块
+            oops.http.server = oops.config.httpServer;                                      // Http 服务器地址
+            oops.http.timeout = oops.config.httpTimeout;                                    // Http 请求超时时间
 
-            //game.frameRate = oops.config.game.frameRate;                                         // 初始化每秒传输帧数
+            game.frameRate = oops.config.frameRate;                                         // 初始化每秒传输帧数
 
             this.enabled = true;
             this.init();
