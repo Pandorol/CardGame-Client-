@@ -2,7 +2,7 @@
 /*
  * 网络相关接口定义
  */
-export type NetData = (string | ArrayBufferLike | Blob | ArrayBufferView);
+export type NetData = (string | ArrayBufferLike | Blob | ArrayBufferView | any);
 export type NetCallFunc = (data: any) => void;
 
 /** 请求协议 */

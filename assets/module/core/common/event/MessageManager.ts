@@ -182,7 +182,31 @@ export class MessageManager {
             this.events.delete(event);
         }
     }
+    /**
+     * 移除全局事件
+     * @param event     事件名
+     * @param listener  处理事件的侦听器函数
+     * @param object    侦听函数绑定的作用域对象
+     */
+    offAll(object: object) {
+        for (let et of this.events) {
+            let event = et[0]
+            let eds = et[1];
 
+            let length = eds.length;
+            for (let i = length - 1; i >= 0; i--) {
+                let bin: EventData = eds[i];
+                if (bin.object == object) {
+                    eds.splice(i, 1);
+                }
+            }
+
+            if (eds.length == 0) {
+                this.events.delete(event);
+            }
+        }
+
+    }
     /** 
      * 触发全局事件 
      * @param event(string)      事件名

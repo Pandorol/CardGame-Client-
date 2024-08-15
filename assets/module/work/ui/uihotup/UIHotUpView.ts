@@ -2,6 +2,7 @@ import { _decorator, Component, game, native, sys } from 'cc';
 // import * as crypto from 'crypto';
 // import * as fs from 'fs';
 import { oops } from '../../../core/Oops';
+import { StorageKeys } from '../../modules/storage/StorageKeys';
 import { UIID } from '../UIConfig';
 import { UpdatePanel } from './UpdatePanel';
 const { ccclass, property } = _decorator;
@@ -37,6 +38,7 @@ export class UIHotUpView extends Component {
             this.storagePath = `${native.fileUtils.getWritablePath()}remote`;
             this.assetsMgr = new native.AssetsManager(this.manifest, this.storagePath, (versionA, versionB) => {
                 this.panel.info.string = "【热更新】客户端版本: " + versionA + ', 当前最新版本: ' + versionB;
+                oops.storage.set(StorageKeys.versionstr, "【热更新】客户端版本: " + versionA + ', 当前最新版本: ' + versionB)
                 let vA = versionA.split('.');
                 let vB = versionB.split('.');
                 for (let i = 0; i < vA.length; ++i) {
@@ -149,6 +151,7 @@ export class UIHotUpView extends Component {
 
         this.panel.info.string = '【热更新】更新成功';
         ;
+        oops.gui.toast("更新成功,正在重启");
         // restart game.
         setTimeout(() => {
             game.restart();

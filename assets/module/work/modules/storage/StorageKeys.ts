@@ -1,3 +1,4 @@
 export enum StorageKeys {
-    chathistorys = "chathistorys"
+    chathistorys = "chathistorys",
+    versionstr = "versionstr"
 }

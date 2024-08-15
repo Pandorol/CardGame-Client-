@@ -22,7 +22,13 @@ export class Config {
         return this._data.config.httpTimeout;
     }
 
-
+    private _chaturl: string
+    get chaturl(): string {
+        return this._chaturl || this._data.config.chaturl;
+    }
+    set chaturl(value: string) {
+        this._chaturl = value
+    }
     private _data: any = null;
     /** 游戏配置数据 */
     public get data(): any {

@@ -12,6 +12,10 @@ export class OneChatMessage {
 }
 var MaxChatNum: number = 200
 export class ChatMessageMgr {
+    private _numusers: number = 0
+    get numusers() {
+        return this._numusers
+    }
     private _allmessages: OneChatMessage[] = []
     get allmessages() {
         return this._allmessages;
@@ -23,6 +27,10 @@ export class ChatMessageMgr {
         this._allmessages = this.StoragePrase()
 
         oops.message.on(EventMessage_work.RecvChatMsg, this.RecvMsg, this)
+        oops.message.on(EventMessage_work.RecvChatNumUsers, this.RecvChatNumUsers, this)
+    }
+    RecvChatNumUsers(event, msg) {
+        this._numusers = msg.numUsers
     }
     RecvMsg(cmd, msg) {
         let o = new OneChatMessage()

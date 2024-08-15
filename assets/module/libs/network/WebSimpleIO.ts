@@ -17,7 +17,12 @@ export class WebSimpleIO {
             let protocol = options.protocol;
             url = `${protocol}://${ip}:${port}`;
         }
-        this._sio = io(url)
+        this._sio = io(url, {
+            reconnection: true, // 允许重连
+            reconnectionAttempts: 10, // 设置重连次数为
+            reconnectionDelay: 1000, // 设置重连间隔秒
+            reconnectionDelayMax: 5000 // 设置最大重连间隔为秒
+        })
         this._sio.on("connect", () => {
             Logger.logNet("connect:sid=" + this._sio.id);
         });

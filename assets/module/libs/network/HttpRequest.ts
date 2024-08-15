@@ -24,6 +24,7 @@ export enum HttpEvent {
  * HTTP请求返回值
  */
 export class HttpReturn {
+    statuscode: number
     /** 是否请求成功 */
     isSucc: boolean = false;
     /** 请求返回数据 */
@@ -251,15 +252,21 @@ export class HttpRequest {
         // 响应结果
         var ret: HttpReturn = new HttpReturn();
 
-        xhr.onloadend = () => {
-            if (xhr.status == 500) {
-                this.deleteCache(newUrl);
+        // xhr.onloadend = () => {
+        //     if (xhr.status == 500) {
+        //         this.deleteCache(newUrl);
 
-                ret.isSucc = false;
-                ret.err = HttpEvent.NO_NETWORK;             // 断网
-                onComplete(ret);
-            }
-        }
+        //         ret.isSucc = false;
+        //         ret.err = HttpEvent.NO_NETWORK;             // 断网
+        //         try {
+        //             ret.res = JSON.parse(xhr.response);
+        //         } catch (error) {
+
+        //         }
+
+        //         onComplete(ret);
+        //     }
+        // }
 
         xhr.onerror = () => {
             this.deleteCache(newUrl);
@@ -280,25 +287,41 @@ export class HttpRequest {
 
             this.deleteCache(newUrl);
 
-            if (xhr.status == 200 && onComplete) {
+            if (
+                //xhr.status == 200
+                //&&
+                onComplete
+            ) {
+                ret.statuscode = xhr.status
                 ret.isSucc = true;
                 if (responseType == 'arraybuffer') {
                     xhr.responseType = responseType;        // 加载非文本格式
                     ret.res = xhr.response;
                 }
                 else {
-                    ret.res = JSON.parse(xhr.response);
+                    try {
+                        ret.res = JSON.parse(xhr.response);
+                    }
+                    catch {
+                        ret.res = xhr.response;
+                    }
                 }
                 onComplete(ret);
             }
         };
-
+        //console.log(params)
         // 发送请求
         if (params == null || params == "") {
             xhr.send();
         }
         else {
-            xhr.send(paramsStr);
+            if (isPost) {
+                xhr.send(JSON.stringify(params));
+            }
+            else {
+                xhr.send(paramsStr);
+            }
+
         }
     }
 

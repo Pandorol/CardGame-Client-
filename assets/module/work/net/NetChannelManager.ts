@@ -1,7 +1,6 @@
 import { oops } from '../../core/Oops';
 import { WebSimpleIO } from "../../libs/network/WebSimpleIO";
 import { chatmgr } from '../modules/chat/ChatDatas';
-import { netConfig } from './NetConfig';
 import { netListener_chat } from './NetListener';
 
 export enum NetChannelType {
@@ -20,7 +19,7 @@ export class NetChannelManager {
         this.chat.onMessage = (msg) => { netListener_chat.onMessage(msg); }
     }
     chatConnect() {
-        oops.netmgr.connect({ url: netConfig.chaturl }, NetChannelType.Chat)
+        oops.netmgr.connect({ url: oops.config.chaturl }, NetChannelType.Chat)
     }
     chatClose() {
         oops.netmgr.close(NetChannelType.Chat)

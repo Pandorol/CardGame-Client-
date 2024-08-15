@@ -1,5 +1,6 @@
 import { DEBUG } from "cc/env";
 
+import { Config } from "../config/Config";
 import { LanguageManager } from "../libs/gui/language/Language";
 import { HttpRequest } from "../libs/network/HttpRequest";
 import { NetSimpleManager } from "../libs/network/NetSimpleManager";
@@ -17,7 +18,7 @@ export class oops {
     /** 日志管理 */
     static log = Logger;
     static res: ResLoader;
-    static config;
+    static config: Config;
     /** 二维界面管理 */
     static gui: LayerManager;
     /** 本地存储 */
