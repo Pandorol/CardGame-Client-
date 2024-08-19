@@ -12,6 +12,7 @@ export enum UIID {
     Login,
     Main,
     Chat,
+    Poster,
 }
 
 /** 打开界面方式的配置数据 */
@@ -23,5 +24,5 @@ export var UIConfigData: { [key: number]: UIConfig } = {
     [UIID.Login]: { layer: LayerType.UI, prefab: "ui/uilogin/uiloginview" },
     [UIID.Main]: { layer: LayerType.UI, prefab: "ui/uimain/uimainview" },
     [UIID.Chat]: { layer: LayerType.UI, prefab: "ui/uichat/uichatview" },
-
+    [UIID.Poster]: { layer: LayerType.UI, prefab: "ui/uiposter/uiposterview" },
 }

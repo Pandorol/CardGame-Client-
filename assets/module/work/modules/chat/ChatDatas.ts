@@ -16,6 +16,7 @@ export class ChatMessageMgr {
     get numusers() {
         return this._numusers
     }
+    public no: number = 0
     private _allmessages: OneChatMessage[] = []
     get allmessages() {
         return this._allmessages;
@@ -31,6 +32,9 @@ export class ChatMessageMgr {
     }
     RecvChatNumUsers(event, msg) {
         this._numusers = msg.numUsers
+        if (this.no == 0) {
+            this.no = msg.numUsers
+        }
     }
     RecvMsg(cmd, msg) {
         let o = new OneChatMessage()

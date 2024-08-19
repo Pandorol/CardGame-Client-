@@ -122,6 +122,8 @@ export class HttpRequest {
     oops.http.post(name, complete, param);
      */
     post(name: string, onComplete: HttpCallback, params: any = null) {
+        this.addHeader("Content-Type", "application/json")
+        this.addHeader("Accept", "*/*")
         this.sendRequest(name, params, true, onComplete);
     }
 
@@ -245,7 +247,8 @@ export class HttpRequest {
 
                 ret.isSucc = false;
                 ret.err = HttpEvent.TIMEOUT;                // 超时
-                onComplete(data);
+                ret.res = { msg: HttpEvent.TIMEOUT }
+                onComplete(ret);
             }
         }
 

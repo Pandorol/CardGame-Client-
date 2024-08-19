@@ -14,6 +14,9 @@ export class UIMainView extends Component {
     onClickChatBtn() {
         oops.gui.open(UIID.Chat)
     }
+    onClickPostBtn() {
+        oops.gui.open(UIID.Poster)
+    }
     update(deltaTime: number) {
 
     }

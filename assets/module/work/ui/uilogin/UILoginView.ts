@@ -14,13 +14,13 @@ export class UILoginView extends Component {
     @property(EditBox)
     editnickname: EditBox = null;
     start() {
-
-
+        this.editaccount.string = oops.storage.get("useraccount", "")
+        this.editpas.string = oops.storage.get("userpassword", "")
+        this.editnickname.string = oops.storage.get("usernickname", "")
     }
 
     onClickReg() {
-        oops.http.addHeader("Content-Type", "application/json")
-        oops.http.addHeader("Accept", "*/*")
+
         oops.http.post(HttpRouter.regist, (res) => {
             oops.gui.toast(res.res.msg)
 
@@ -31,13 +31,20 @@ export class UILoginView extends Component {
         })
     }
     onClickLogin() {
-        oops.http.addHeader("Content-Type", "application/json")
-        oops.http.addHeader("Accept", "*/*")
+
         oops.http.post(HttpRouter.login, (res) => {
             oops.gui.toast(res.res.msg)
             if (res.res.sucess) {
-                oops.config.chaturl = res.res.chaturl
-                oops.log.logBusiness([res, oops.config])
+                if (res.res.chaturl) {
+                    oops.config.chaturl = res.res.chaturl
+                }
+                oops.storage.set("useraccount", this.editaccount.string)
+                oops.storage.set("userpassword", this.editpas.string)
+                if (this.editnickname.string.length > 0) {
+                    oops.storage.set("usernickname", this.editnickname.string)
+                }
+
+                oops.storage.set("userid", res.res.userid || 0)
                 this.onClickOpenMain()
             }
         }, {

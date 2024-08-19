@@ -375,6 +375,9 @@ export default class List extends Component {
 
     private _thisNodeUt: UITransform;
 
+
+    public onScrollEnded: Function
+    public onScrollToped: Function
     //----------------------------------------------------------------------------
 
     onLoad() {
@@ -1313,6 +1316,50 @@ export default class List extends Component {
     _onScrollEnded() {
         let t: any = this;
         t._curScrollIsTouch = false;
+
+        // 获取当前滚动位置和最大滚动位置
+        const scrollOffset = t._scrollView.getScrollOffset();
+        const maxScrollOffset = t._scrollView.getMaxScrollOffset();
+
+        // 判断是否滚动到顶部
+        if (t._sizeType) { // 纵向滚动
+            if (scrollOffset.y <= 0) {
+                //console.log('已经滚动到顶部');
+                if (this.onScrollToped) {
+                    this.onScrollToped()
+                }
+                // 在这里触发滚动到顶部的事件或逻辑
+            }
+        } else { // 横向滚动
+            if (scrollOffset.x <= 0) {
+                //console.log('已经滚动到顶部');
+                if (this.onScrollToped) {
+                    this.onScrollToped()
+                }
+                // 在这里触发滚动到顶部的事件或逻辑
+            }
+        }
+
+        // 判断是否滚动到底部
+        if (t._sizeType) { // 纵向滚动
+            if (scrollOffset.y >= maxScrollOffset.y) {
+                //console.log('已经滚动到底部');
+                if (this.onScrollEnded) {
+                    this.onScrollEnded()
+                }
+                // 在这里触发滚动到底部的事件或逻辑
+            }
+        } else { // 横向滚动
+            if (scrollOffset.x >= maxScrollOffset.x) {
+                //console.log('已经滚动到底部');
+                if (this.onScrollEnded) {
+                    this.onScrollEnded()
+                }
+                // 在这里触发滚动到底部的事件或逻辑
+            }
+        }
+
+
         if (t.scrollToListId != null) {
             let item: any = t.getItemByListId(t.scrollToListId);
             t.scrollToListId = null;

@@ -5,7 +5,7 @@
         "chaturl": "ws://192.168.3.22:3000",
         "localDataKey": "aa",
         "localDataIv": "bb",
-        "httpServer": "http://192.168.3.22:8084",
+        "httpServer": "http://8.138.172.203:8084",
         "httpTimeout": 10000,
         "frameRate": 60
     },

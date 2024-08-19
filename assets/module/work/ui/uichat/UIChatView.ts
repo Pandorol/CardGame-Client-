@@ -26,6 +26,7 @@ export class UIChatView extends Component {
         oops.message.on(EventMessage_work.ChatMsgAdded, this.ChatMsgAddded, this)
         oops.message.on(EventMessage_work.RecvChatNumUsers, this.RecvChatNumUsers, this)
     }
+
     RecvChatNumUsers(event, msg) {
 
         this.lb_numusers.params = [{ key: "0", value: msg.numUsers }]
@@ -39,7 +40,8 @@ export class UIChatView extends Component {
     onClickEmit() {
         let message = this.editmessage.string
         this.editmessage.string = ''
-        oops.netmgr.send({ message: message }, NetChannelType.Chat)
+        let username = oops.storage.get("usernickname", "No." + chatmgr.no)
+        oops.netmgr.send({ username: username, message: message, timestamp: new Date().getTime() }, NetChannelType.Chat)
     }
     update(deltaTime: number) {
 
@@ -49,7 +51,7 @@ export class UIChatView extends Component {
     }
     onBeforeRemove() {
         oops.message.offAll(this)
-        oops.log.logBusiness("chatviewonBeforeRemovevalled")
+
     }
 }
 

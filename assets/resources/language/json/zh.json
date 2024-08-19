@@ -26,5 +26,6 @@
     "loading_load_json": "加载游戏本地数据",
     "loading_load_game": "加载游戏内容",
     "loading_load_player": "获取用户信息",
-    "curnumusers": "当前用户人数：%{0}"
+    "curnumusers": "当前用户人数：%{0}",
+    "nomore": "没有更多了"
 }
