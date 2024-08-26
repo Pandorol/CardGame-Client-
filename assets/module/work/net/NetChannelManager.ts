@@ -1,6 +1,7 @@
 import { oops } from '../../core/Oops';
 import { WebSimpleIO } from "../../libs/network/WebSimpleIO";
 import { chatmgr } from '../modules/chat/ChatDatas';
+import { gfivemgr } from '../modules/gfive/GfiveMgr';
 import { netListener_chat } from './NetListener';
 
 export enum NetChannelType {
@@ -9,7 +10,7 @@ export enum NetChannelType {
 }
 export class NetChannelManager {
     public chat: WebSimpleIO;
-
+    public gfive: WebSimpleIO;
     chatCreate() {
         if (!this.chat) {
             this.chat = new WebSimpleIO();
@@ -23,6 +24,13 @@ export class NetChannelManager {
     }
     chatClose() {
         oops.netmgr.close(NetChannelType.Chat)
+    }
+
+    gfiveCreate() {
+        if (!this.gfive) {
+            this.gfive = new WebSimpleIO();
+            gfivemgr.init()
+        }
     }
 
 }

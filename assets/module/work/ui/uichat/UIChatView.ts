@@ -5,6 +5,7 @@ import { LanguageLabel } from '../../../libs/gui/language/LanguageLabel';
 import { EventMessage_work } from '../../event/EventMessage_work';
 import { chatmgr } from '../../modules/chat/ChatDatas';
 import { NetChannelType } from '../../net/NetChannelManager';
+import { Cmd } from '../../net/NetListener';
 const { ccclass, property } = _decorator;
 
 @ccclass('UIChatView')
@@ -41,7 +42,7 @@ export class UIChatView extends Component {
         let message = this.editmessage.string
         this.editmessage.string = ''
         let username = oops.storage.get("usernickname", "No." + chatmgr.no)
-        oops.netmgr.send({ username: username, message: message, timestamp: new Date().getTime() }, NetChannelType.Chat)
+        oops.netmgr.send({ cmd: Cmd.ChatMsg, username: username, message: message, timestamp: new Date().getTime() }, NetChannelType.Chat)
     }
     update(deltaTime: number) {
 

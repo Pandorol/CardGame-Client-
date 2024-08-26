@@ -6,6 +6,7 @@ export enum Cmd {
     test1 = 1,
     ChatMsg = 2,
     ChatNumUsers = 3,
+    GetRoomlist = 4,
 }
 export class ChatNetListener {
     onMessage(msg) {
@@ -20,6 +21,9 @@ export class ChatNetListener {
                 break;
             case Cmd.ChatNumUsers:
                 oops.message.dispatchEvent(EventMessage_work.RecvChatNumUsers, msg)
+                break;
+            case Cmd.GetRoomlist:
+                oops.message.dispatchEvent(EventMessage_work.RecvRoomList, msg)
                 break;
             default:
                 break;

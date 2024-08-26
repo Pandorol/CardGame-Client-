@@ -1362,7 +1362,7 @@
       "b": 0,
       "a": 255
     },
-    "_string": "游戏",
+    "_string": "房间",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 40,
@@ -1575,7 +1575,7 @@
     },
     "component": "",
     "_componentId": "6e3d8CL+79PWo2AWU5Pijt4",
-    "handler": "onClickPostBtn",
+    "handler": "onClickRoomsBtn",
     "customEventData": ""
   },
   {

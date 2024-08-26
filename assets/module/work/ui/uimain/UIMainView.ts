@@ -17,6 +17,9 @@ export class UIMainView extends Component {
     onClickPostBtn() {
         oops.gui.open(UIID.Poster)
     }
+    onClickRoomsBtn() {
+        oops.gui.open(UIID.Rooms)
+    }
     update(deltaTime: number) {
 
     }
