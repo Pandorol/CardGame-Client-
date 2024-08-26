@@ -1,4 +1,5 @@
 import { _decorator, Component } from 'cc';
+import { oops } from '../../../core/Oops';
 const { ccclass, property } = _decorator;
 
 @ccclass('UIGfiveView')
