@@ -54,6 +54,7 @@ export class UILoginView extends Component {
     }
     onClickOpenMain() {
         netChannel.chatCreate()
+        netChannel.gfiveCreate()
         netChannel.chatConnect()
         oops.gui.open(UIID.Main)
         oops.gui.removeByNode(this.node)

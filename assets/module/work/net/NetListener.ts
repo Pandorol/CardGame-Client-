@@ -7,6 +7,17 @@ export enum Cmd {
     ChatMsg = 2,
     ChatNumUsers = 3,
     GetRoomlist = 4,
+    joinroomsuc = "joinroomsuc",
+    leaveroom = "leaveroom",
+    rejoinroomsuc = "rejoinroomsuc",
+    roomdatas = "roomdatas",
+    newOwner = "newOwner",
+    startact = "startact",
+    endact = "endact",
+    getroomlist = "getroomlist",
+    readystatus = "readystatus",
+    kickpos = "kickpos",
+    atpos = "atpos",
 }
 export class ChatNetListener {
     onMessage(msg) {
@@ -30,4 +41,22 @@ export class ChatNetListener {
         }
     }
 }
+export class GfiveNetListener {
+    onMessage(msg) {
+        let cmd = msg.cmd;
+        console.log(msg)
+        switch (cmd) {
+            case Cmd.test1:
+                oops.message.dispatchEvent(cmd + '', msg)
+                break;
+            case Cmd.joinroomsuc:
+                oops.message.dispatchEvent(EventMessage_work.UserJoinRoom, msg)
+            case Cmd.leaveroom:
+                oops.message.dispatchEvent(EventMessage_work.UserLeaveRoom, msg)
+            default:
+                break;
+        }
+    }
+}
 export var netListener_chat = new ChatNetListener();
+export var netListener_gfive = new GfiveNetListener();

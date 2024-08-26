@@ -23,6 +23,9 @@ export class UIMainView extends Component {
     update(deltaTime: number) {
 
     }
+    onClickTestBtn() {
+        oops.gui.open(UIID.Gfive)
+    }
 }
 
 

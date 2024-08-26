@@ -3,5 +3,8 @@ export enum EventMessage_work {
     ChatMsgAdded = "ChatMsgAdded",
     RecvChatNumUsers = "RecvChatNumUsers",
     RecvRoomList = "RecvRoomList",
-    PosterAdded = "PosterAdded"
+    PosterAdded = "PosterAdded",
+    UserJoinRoom = "UserJoinRoom",
+    SetRoomUsers = "SetRoomUsers",
+    UserLeaveRoom = "UserLeaveRoom"
 }

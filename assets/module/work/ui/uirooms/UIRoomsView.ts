@@ -3,6 +3,8 @@ import { oops } from '../../../core/Oops';
 import List from '../../../core/utils/List';
 import { EventMessage_work } from '../../event/EventMessage_work';
 import { roomsmgr } from '../../modules/room/RoomsMgr';
+import { netChannel } from '../../net/NetChannelManager';
+import { UIID } from '../UIConfig';
 import { uiroomsitem } from './uiroomsitem';
 const { ccclass, property } = _decorator;
 
@@ -16,6 +18,7 @@ export class UIRoomsView extends Component {
     selectedid: number
     start() {
         oops.message.on(EventMessage_work.RecvRoomList, this.RecvRoomList, this)
+
         roomsmgr.GetRoomList()
     }
     RecvRoomList(event, msg) {
@@ -28,7 +31,7 @@ export class UIRoomsView extends Component {
     onListSelected(item: any, selectedId: number, lastSelectedId: number, val: number) {
         //val,多选时的个数
         this.selectedid = selectedId
-        this.lbroomdetail.string = JSON.stringify(this.roomlist[selectedId], null, 1).replace(/\,|\:|\"|\{|\}/g, "")
+        this.lbroomdetail.string = JSON.stringify(this.roomlist[this.selectedid], null, 1).replace(/\,|\:|\"|\{|\}/g, "")
 
     }
     update(deltaTime: number) {
@@ -38,10 +41,15 @@ export class UIRoomsView extends Component {
 
     }
     onClickedJoin() {
-
+        netChannel.gfiveJoin(this.roomlist[this.selectedid].roomid, oops.storage.getNumber("userid"))
+        oops.gui.open(UIID.Room)
     }
+
     onClickClose() {
         oops.gui.removeByNode(this.node)
+    }
+    onBeforeRemove() {
+        oops.message.offAll(this)
     }
 }
 

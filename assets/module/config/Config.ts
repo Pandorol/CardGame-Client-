@@ -29,6 +29,16 @@ export class Config {
     set chaturl(value: string) {
         this._chaturl = value
     }
+
+    private _gfiveurl: string
+    get gfiveurl(): string {
+        return this._gfiveurl || this._data.config.gfiveurl;
+    }
+    set gfiveurl(value: string) {
+        this._gfiveurl = value
+    }
+
+
     private _data: any = null;
     /** 游戏配置数据 */
     public get data(): any {

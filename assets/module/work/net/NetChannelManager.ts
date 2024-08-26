@@ -2,11 +2,12 @@ import { oops } from '../../core/Oops';
 import { WebSimpleIO } from "../../libs/network/WebSimpleIO";
 import { chatmgr } from '../modules/chat/ChatDatas';
 import { gfivemgr } from '../modules/gfive/GfiveMgr';
-import { netListener_chat } from './NetListener';
+import { netListener_chat, netListener_gfive } from './NetListener';
 
 export enum NetChannelType {
 
     Chat = 0,
+    Gfive = 1
 }
 export class NetChannelManager {
     public chat: WebSimpleIO;
@@ -31,8 +32,15 @@ export class NetChannelManager {
             this.gfive = new WebSimpleIO();
             gfivemgr.init()
         }
+        oops.netmgr.setNetNode(this.gfive, NetChannelType.Gfive)
+        this.gfive.onMessage = (msg) => { netListener_gfive.onMessage(msg); }
     }
-
+    gfiveJoin(roomid, userid) {
+        oops.netmgr.connect({ url: oops.config.gfiveurl + "?roomid=" + roomid + "&userid=" + userid }, NetChannelType.Gfive)
+    }
+    gfiveClose() {
+        oops.netmgr.close(NetChannelType.Gfive)
+    }
 }
 
 export var netChannel = new NetChannelManager();

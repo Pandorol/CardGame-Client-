@@ -34,23 +34,23 @@
         "__id__": 120
       },
       {
-        "__id__": 134
+        "__id__": 135
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 140
+        "__id__": 141
       },
       {
-        "__id__": 142
+        "__id__": 143
       },
       {
-        "__id__": 144
+        "__id__": 145
       }
     ],
     "_prefab": {
-      "__id__": 146
+      "__id__": 147
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -2830,7 +2830,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 133
+      "__id__": 134
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -3105,9 +3105,13 @@
     "__prefab": {
       "__id__": 132
     },
-    "clickEvents": [],
+    "clickEvents": [
+      {
+        "__id__": 133
+      }
+    ],
     "_interactable": true,
-    "_transition": 2,
+    "_transition": 3,
     "_normalColor": {
       "__type__": "cc.Color",
       "r": 214,
@@ -3164,6 +3168,16 @@
     "fileId": "97fBGYnXBMlLqBRqjedRCq"
   },
   {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 1
+    },
+    "component": "",
+    "_componentId": "7e5599LmrdBjo8yHZVAoc+a",
+    "handler": "onClickedJoin",
+    "customEventData": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -3188,14 +3202,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 135
+        "__id__": 136
       },
       {
-        "__id__": 137
+        "__id__": 138
       }
     ],
     "_prefab": {
-      "__id__": 139
+      "__id__": 140
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -3232,11 +3246,11 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 134
+      "__id__": 135
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 136
+      "__id__": 137
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -3260,11 +3274,11 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 134
+      "__id__": 135
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 138
+      "__id__": 139
     },
     "_customMaterial": null,
     "_srcBlendFactor": 2,
@@ -3345,7 +3359,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 141
+      "__id__": 142
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -3373,7 +3387,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 143
+      "__id__": 144
     },
     "_alignFlags": 45,
     "_target": null,
@@ -3409,13 +3423,13 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 145
+      "__id__": 146
     },
     "list": {
       "__id__": 85
     },
     "lbroomdetail": {
-      "__id__": 137
+      "__id__": 138
     },
     "_id": ""
   },
