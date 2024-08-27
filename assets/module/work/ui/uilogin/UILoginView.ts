@@ -1,5 +1,6 @@
 import { _decorator, Component, EditBox } from 'cc';
 import { oops } from '../../../core/Oops';
+import { userdt } from '../../modules/user/UserDatas';
 import { HttpRouter } from '../../net/HttpRouter';
 import { netChannel } from '../../net/NetChannelManager';
 import { UIID } from '../UIConfig';
@@ -45,6 +46,7 @@ export class UILoginView extends Component {
                 }
 
                 oops.storage.set("userid", res.res.userid || 0)
+                userdt.userid = res.res.userid || 0
                 this.onClickOpenMain()
             }
         }, {

@@ -3,6 +3,7 @@ import { oops } from '../../../core/Oops';
 import List from '../../../core/utils/List';
 import { EventMessage_work } from '../../event/EventMessage_work';
 import { roomsmgr } from '../../modules/room/RoomsMgr';
+import { userdt } from '../../modules/user/UserDatas';
 import { netChannel } from '../../net/NetChannelManager';
 import { UIID } from '../UIConfig';
 import { uiroomsitem } from './uiroomsitem';
@@ -38,10 +39,11 @@ export class UIRoomsView extends Component {
 
     }
     onClickedCreate() {
-
+        netChannel.gfiveJoin("roomid" + userdt.userid, userdt.userid)
+        oops.gui.open(UIID.Room)
     }
     onClickedJoin() {
-        netChannel.gfiveJoin(this.roomlist[this.selectedid].roomid, oops.storage.getNumber("userid"))
+        netChannel.gfiveJoin(this.roomlist[this.selectedid].roomid, userdt.userid)
         oops.gui.open(UIID.Room)
     }
 

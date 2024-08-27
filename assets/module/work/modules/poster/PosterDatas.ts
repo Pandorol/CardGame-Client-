@@ -3,6 +3,7 @@ import { LanguageData } from '../../../libs/gui/language/LanguageData';
 import { EventMessage_work } from '../../event/EventMessage_work';
 import { HttpRouter } from '../../net/HttpRouter';
 import { chatmgr } from '../chat/ChatDatas';
+import { userdt } from '../user/UserDatas';
 export class PosterDataMgr {
     private _allmessagescacheid = {}
     private _ptstotalNo: number = 0
@@ -59,7 +60,7 @@ export class PosterDataMgr {
         oops.http.post(HttpRouter.uploadposter, (ret) => {
             oops.gui.toast(ret.res.msg)
         }, {
-            userid: oops.storage.getNumber("userid"), username: oops.storage.get("usernickname", "No." + chatmgr.no),
+            userid: userdt.userid, username: oops.storage.get("usernickname", "No." + chatmgr.no),
             title: title, description: des
         })
     }

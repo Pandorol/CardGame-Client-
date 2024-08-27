@@ -51,8 +51,19 @@ export class GfiveNetListener {
                 break;
             case Cmd.joinroomsuc:
                 oops.message.dispatchEvent(EventMessage_work.UserJoinRoom, msg)
+                break;
             case Cmd.leaveroom:
                 oops.message.dispatchEvent(EventMessage_work.UserLeaveRoom, msg)
+                break;
+            case Cmd.startact:
+                oops.message.dispatchEvent(EventMessage_work.StartAct, msg)
+                break;
+            case Cmd.atpos:
+                oops.message.dispatchEvent(EventMessage_work.UserAtPos, msg)
+                break;
+            case Cmd.newOwner:
+                oops.message.dispatchEvent(EventMessage_work.NewOwner, msg)
+                break;
             default:
                 break;
         }

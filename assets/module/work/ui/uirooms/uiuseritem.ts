@@ -12,7 +12,6 @@ export class uiuseritem extends Component {
         this.lbuser.string = lb
     }
     update(deltaTime: number) {
-
     }
 }
 

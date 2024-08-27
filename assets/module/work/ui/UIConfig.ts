@@ -16,6 +16,7 @@ export enum UIID {
     Rooms,
     Room,
     Gfive,
+    MoveTest,
 }
 
 /** 打开界面方式的配置数据 */
@@ -31,4 +32,5 @@ export var UIConfigData: { [key: number]: UIConfig } = {
     [UIID.Rooms]: { layer: LayerType.UI, prefab: "ui/uirooms/uiroomsview" },
     [UIID.Room]: { layer: LayerType.UI, prefab: "ui/uirooms/uiroomview" },
     [UIID.Gfive]: { layer: LayerType.UI, prefab: "ui/uigfive/uigfiveview" },
+    [UIID.MoveTest]: { layer: LayerType.UI, prefab: "ui/uimovetest/uimovetestview" },
 }

@@ -2484,7 +2484,7 @@
     },
     "component": "",
     "_componentId": "2ff1eAs2VdGWoHMmjnEnJDI",
-    "handler": "onClickClose",
+    "handler": "onClickStart",
     "customEventData": ""
   },
   {
@@ -2590,6 +2590,9 @@
         "__id__": 88
       }
     ],
+    "btnstart": {
+      "__id__": 102
+    },
     "_id": ""
   },
   {

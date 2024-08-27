@@ -6,5 +6,8 @@ export enum EventMessage_work {
     PosterAdded = "PosterAdded",
     UserJoinRoom = "UserJoinRoom",
     SetRoomUsers = "SetRoomUsers",
-    UserLeaveRoom = "UserLeaveRoom"
+    UserLeaveRoom = "UserLeaveRoom",
+    StartAct = "StartAct",
+    UserAtPos = "UserAtPos",
+    NewOwner = "NewOwner"
 }

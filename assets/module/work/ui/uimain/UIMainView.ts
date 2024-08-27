@@ -10,6 +10,7 @@ export class UIMainView extends Component {
     lb_version: Label = null
     start() {
         this.lb_version.string = oops.storage.get(StorageKeys.versionstr, "nothing")
+        //this.onClickTestBtn()
     }
     onClickChatBtn() {
         oops.gui.open(UIID.Chat)
@@ -24,7 +25,7 @@ export class UIMainView extends Component {
 
     }
     onClickTestBtn() {
-        oops.gui.open(UIID.Gfive)
+        oops.gui.open(UIID.MoveTest)
     }
 }
 
