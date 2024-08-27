@@ -1,6 +1,6 @@
 export class moveaction {
     active: boolean = false
-    speedratio = 0.1
+    speedratio = 0.05
     constructor() {
         // Initialize speed with default values
         this.speed = {
