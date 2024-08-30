@@ -18,6 +18,7 @@ export class UILoginView extends Component {
         this.editaccount.string = oops.storage.get("useraccount", "")
         this.editpas.string = oops.storage.get("userpassword", "")
         this.editnickname.string = oops.storage.get("usernickname", "")
+        //oops.gui.open(UIID.MoveTest)
     }
 
     onClickReg() {
@@ -47,6 +48,8 @@ export class UILoginView extends Component {
 
                 oops.storage.set("userid", res.res.userid || 0)
                 userdt.userid = res.res.userid || 0
+                userdt.useraccount = this.editaccount.string
+                userdt.userpassword = this.editpas.string
                 this.onClickOpenMain()
             }
         }, {

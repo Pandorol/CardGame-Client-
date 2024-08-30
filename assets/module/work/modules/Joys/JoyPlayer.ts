@@ -6,19 +6,19 @@ import {
     misc,
     PhysicsSystem2D,
     RigidBody2D,
-    SystemEventType,
     Vec2,
-    Vec3,
+    Vec3
 } from "cc";
 const { ccclass, property } = _decorator;
 
+import { Input } from "cc";
 import type { JoystickDataType } from "./Joystick";
 import { instance, SpeedType } from "./Joystick";
 
 PhysicsSystem2D.instance.enable = true;
 
-@ccclass("Player")
-export default class Player extends Component {
+@ccclass("JoyPlayer")
+export default class JoyPlayer extends Component {
     @property({
         displayName: "刚体模式",
         tooltip: "不会立即停止",
@@ -69,9 +69,9 @@ export default class Player extends Component {
             this._body = this.node.getComponent(RigidBody2D);
         }
 
-        instance.on(SystemEventType.TOUCH_START, this.onTouchStart, this);
-        instance.on(SystemEventType.TOUCH_MOVE, this.onTouchMove, this);
-        instance.on(SystemEventType.TOUCH_END, this.onTouchEnd, this);
+        instance.on(Input.EventType.TOUCH_START, this.onTouchStart, this);
+        instance.on(Input.EventType.TOUCH_MOVE, this.onTouchMove, this);
+        instance.on(Input.EventType.TOUCH_END, this.onTouchEnd, this);
     }
 
     onTouchStart() { }
@@ -126,10 +126,10 @@ export default class Player extends Component {
                 // fps: 60
                 this.moveDir.clone().multiplyScalar(this._moveSpeed / 60)
             );
-            console.log(this._moveSpeed / 60);
+            //console.log(this._moveSpeed / 60);
             this.node.setPosition(newPos);
 
-            console.log(newPos);
+            //console.log(newPos);
         }
     }
 

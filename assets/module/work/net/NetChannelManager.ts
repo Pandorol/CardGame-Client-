@@ -2,6 +2,7 @@ import { oops } from '../../core/Oops';
 import { WebSimpleIO } from "../../libs/network/WebSimpleIO";
 import { chatmgr } from '../modules/chat/ChatDatas';
 import { gfivemgr } from '../modules/gfive/GfiveMgr';
+import { userdt } from '../modules/user/UserDatas';
 import { netListener_chat, netListener_gfive } from './NetListener';
 
 export enum NetChannelType {
@@ -21,7 +22,7 @@ export class NetChannelManager {
         this.chat.onMessage = (msg) => { netListener_chat.onMessage(msg); }
     }
     chatConnect() {
-        oops.netmgr.connect({ url: oops.config.chaturl }, NetChannelType.Chat)
+        oops.netmgr.connect({ url: oops.config.chaturl + '?userid=' + userdt.userid }, NetChannelType.Chat)
     }
     chatClose() {
         oops.netmgr.close(NetChannelType.Chat)

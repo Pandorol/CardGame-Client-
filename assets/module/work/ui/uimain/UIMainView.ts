@@ -1,6 +1,8 @@
 import { _decorator, Component, Label } from 'cc';
 import { oops } from '../../../core/Oops';
+import { chatmgr } from '../../modules/chat/ChatDatas';
 import { StorageKeys } from '../../modules/storage/StorageKeys';
+import { Cmd } from '../../net/NetListener';
 import { UIID } from '../UIConfig';
 const { ccclass, property } = _decorator;
 
@@ -20,6 +22,7 @@ export class UIMainView extends Component {
     }
     onClickRoomsBtn() {
         oops.gui.open(UIID.Rooms)
+        chatmgr.SendMsg({ cmd: Cmd.GetIsAct })
     }
     update(deltaTime: number) {
 

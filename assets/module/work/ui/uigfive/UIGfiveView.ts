@@ -14,13 +14,18 @@ export class UIGfiveView extends Component {
     mplayers: Node[] = []
 
     start() {
+        this.InitPlayers()
+        oops.message.on(EventMessage_work.UserAtPos, this.SetUserPos, this)
+        oops.message.on(EventMessage_work.SetRoomUsers, this.InitPlayers, this)
+    }
+    InitPlayers() {
+        this.players[userdt.userid] = this.mineplayer
         Object.keys(gfivemgr.players).forEach((id, index) => {
             if (id != userdt.userid) {
                 this.players[id] = this.mplayers[index]
                 this.players[id].active = true
             }
         })
-        oops.message.on(EventMessage_work.UserAtPos, this.SetUserPos, this)
     }
     SetUserPos(event, msg) {
         this.players[msg.userid].position = v3(msg.atpos.x, msg.atpos.y, 0)

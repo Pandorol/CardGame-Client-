@@ -7,6 +7,7 @@ export enum Cmd {
     ChatMsg = 2,
     ChatNumUsers = 3,
     GetRoomlist = 4,
+    GetIsAct = 5,
     joinroomsuc = "joinroomsuc",
     leaveroom = "leaveroom",
     rejoinroomsuc = "rejoinroomsuc",
@@ -36,6 +37,10 @@ export class ChatNetListener {
             case Cmd.GetRoomlist:
                 oops.message.dispatchEvent(EventMessage_work.RecvRoomList, msg)
                 break;
+            case Cmd.GetIsAct:
+                oops.message.dispatchEvent(EventMessage_work.RecvGetIsAct, msg)
+                break;
+
             default:
                 break;
         }
@@ -51,6 +56,12 @@ export class GfiveNetListener {
                 break;
             case Cmd.joinroomsuc:
                 oops.message.dispatchEvent(EventMessage_work.UserJoinRoom, msg)
+                break;
+            case Cmd.rejoinroomsuc:
+                oops.message.dispatchEvent(EventMessage_work.ReUserJoinRoom, msg)
+                break;
+            case Cmd.roomdatas:
+                oops.message.dispatchEvent(EventMessage_work.RoomDatas, msg)
                 break;
             case Cmd.leaveroom:
                 oops.message.dispatchEvent(EventMessage_work.UserLeaveRoom, msg)

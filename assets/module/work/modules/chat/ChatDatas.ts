@@ -1,7 +1,9 @@
 import { oops } from '../../../core/Oops';
 import { StringUtil } from "../../../core/utils/StringUtil";
 import { EventMessage_work } from '../../event/EventMessage_work';
+import { netChannel } from '../../net/NetChannelManager';
 import { StorageKeys } from '../storage/StorageKeys';
+import { userdt } from '../user/UserDatas';
 
 export class OneChatMessage {
     userid: string
@@ -29,6 +31,11 @@ export class ChatMessageMgr {
 
         oops.message.on(EventMessage_work.RecvChatMsg, this.RecvMsg, this)
         oops.message.on(EventMessage_work.RecvChatNumUsers, this.RecvChatNumUsers, this)
+        oops.message.on(EventMessage_work.RecvGetIsAct, this.RecvGetIsAct, this)
+    }
+    RecvGetIsAct(event, msg) {
+
+        netChannel.gfiveJoin(msg.playerdata.roomid, userdt.userid)
     }
     RecvChatNumUsers(event, msg) {
         this._numusers = msg.numUsers
@@ -61,6 +68,9 @@ export class ChatMessageMgr {
         }
 
         return all;
+    }
+    SendMsg(msg) {
+        netChannel.chat.send(msg)
     }
 }
 export var chatmgr: ChatMessageMgr = new ChatMessageMgr()

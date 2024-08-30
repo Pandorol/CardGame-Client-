@@ -4,14 +4,12 @@ import {
     Component,
     Enum,
     EventTarget,
-    EventTouch,
-    Node,
+    EventTouch, Input, Node,
     Size,
-    SystemEventType,
     UIOpacity,
     UITransform,
     Vec2,
-    Vec3,
+    Vec3
 } from "cc";
 const { ccclass, property } = _decorator;
 
@@ -90,13 +88,11 @@ export class Joystick extends Component {
     directionType = DirectionType.ALL;
 
     @property({
-        type: Vec3,
         tooltip: "摇杆所在位置",
     })
     _stickPos = new Vec3();
 
     @property({
-        type: Vec2,
         tooltip: "触摸位置",
     })
     _touchLocation = new Vec2();
@@ -167,10 +163,10 @@ export class Joystick extends Component {
      */
     _initTouchEvent() {
         // set the size of joystick node to control scale
-        this.node.on(SystemEventType.TOUCH_START, this._touchStartEvent, this);
-        this.node.on(SystemEventType.TOUCH_MOVE, this._touchMoveEvent, this);
-        this.node.on(SystemEventType.TOUCH_END, this._touchEndEvent, this);
-        this.node.on(SystemEventType.TOUCH_CANCEL, this._touchEndEvent, this);
+        this.node.on(Input.EventType.TOUCH_START, this._touchStartEvent, this);
+        this.node.on(Input.EventType.TOUCH_MOVE, this._touchMoveEvent, this);
+        this.node.on(Input.EventType.TOUCH_END, this._touchEndEvent, this);
+        this.node.on(Input.EventType.TOUCH_CANCEL, this._touchEndEvent, this);
     }
 
     /**
@@ -178,9 +174,10 @@ export class Joystick extends Component {
      * @param event
      */
     _touchStartEvent(event: EventTouch) {
+
         if (!this.ring || !this.dot) return;
 
-        instance.emit(SystemEventType.TOUCH_START, event);
+        instance.emit(Input.EventType.TOUCH_START, event);
 
         const location = event.getUILocation();
         const touchPos = new Vec3(location.x, location.y);
@@ -240,7 +237,7 @@ export class Joystick extends Component {
             speedType = SpeedType.FAST;
         }
 
-        instance.emit(SystemEventType.TOUCH_MOVE, event, {
+        instance.emit(Input.EventType.TOUCH_MOVE, event, {
             speedType,
             moveVec: moveVec.normalize(),
         });
@@ -258,7 +255,7 @@ export class Joystick extends Component {
             this.node.getComponent(UIOpacity)!.opacity = 0;
         }
 
-        instance.emit(SystemEventType.TOUCH_END, event, {
+        instance.emit(Input.EventType.TOUCH_END, event, {
             speedType: SpeedType.STOP,
         });
     }
