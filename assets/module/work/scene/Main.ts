@@ -2,6 +2,7 @@ import { _decorator, profiler } from 'cc';
 import { DEBUG } from 'cc/env';
 import { oops } from '../../core/Oops';
 import { Root } from '../../core/Root';
+import { cardsmgr } from '../modules/cards/CardDatas';
 import { UIConfigData, UIID } from '../ui/UIConfig';
 const { ccclass, property } = _decorator;
 
@@ -17,7 +18,7 @@ export class Main extends Root {
                 oops.gui.open(UIID.HotUp)
             });
         });
-
+        cardsmgr.Init()
     }
 
     update(deltaTime: number) {
