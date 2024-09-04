@@ -30,6 +30,9 @@ export class UIMainView extends Component {
     onClickTestBtn() {
         oops.gui.open(UIID.MoveTest)
     }
+    onClickTest2Btn() {
+        oops.gui.open(UIID.MoveTest2)
+    }
     onClickShopCard() {
         oops.gui.open(UIID.ShopCard)
     }

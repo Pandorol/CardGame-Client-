@@ -7,6 +7,7 @@ export enum ActionMode {
     move = 1,
     atk = 2,
     dfs = 3,
+    ready = 4,
 }
 @ccclass('UIMoveTestView2')
 export class UIMoveTestView2 extends Component {
@@ -54,17 +55,28 @@ export class UIMoveTestView2 extends Component {
         let touchPos = ev.getUILocation()
         this.endnode = this.getTouchInboot(touchPos)
         if (!this.endnode) { return }
+
         if (this.actionMode == ActionMode.move) {
-            if (this.endnode.children[0]) { return }
+            this.onMoveAction()
             //oops.gui.toast("")
         }
+        else if (this.actionMode == ActionMode.ready) {
 
+        }
+
+    }
+    onMoveAction() {
+        if (this.endnode.children[0]) { return }
         let nd = this.startnode.children[0]
         if (!nd) { return }
+        if (this.getStartEndNodesDis() > 1) { return }
         nd.removeFromParent()
         nd.setParent(this.endnode)
-
-
+    }
+    getStartEndNodesDis() {
+        let startdot: UIMoveDot2 = this.startnode.getComponent(UIMoveDot2)
+        let enddot: UIMoveDot2 = this.endnode.getComponent(UIMoveDot2)
+        return Math.abs(startdot.mTagX - enddot.mTagX) + Math.abs(startdot.mTagY - enddot.mTagY)
     }
     OnTouchCancel(ev) {
         this.startnode = null

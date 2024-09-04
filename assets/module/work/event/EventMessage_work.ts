@@ -4,7 +4,7 @@ export enum EventMessage_work {
     RecvChatNumUsers = "RecvChatNumUsers",
     RecvRoomList = "RecvRoomList",
     RecvGetIsAct = "RecvGetIsAct",
-
+    LoginDatas = "LoginDatas",
 
     PosterAdded = "PosterAdded",
     UserJoinRoom = "UserJoinRoom",
@@ -14,5 +14,7 @@ export enum EventMessage_work {
     UserLeaveRoom = "UserLeaveRoom",
     StartAct = "StartAct",
     UserAtPos = "UserAtPos",
-    NewOwner = "NewOwner"
+    NewOwner = "NewOwner",
+
+    LoginDatasSetted = "LoginDatasSetted"
 }

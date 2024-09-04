@@ -1,4 +1,5 @@
 import { log, warn } from "cc";
+import { Logger } from '../log/Logger';
 import { ListenerFunc } from "./EventMessage";
 
 class EventData {
@@ -138,6 +139,7 @@ export class MessageManager {
         data.listener = listener;
         data.object = object;
         eds.push(data);
+        Logger.logBusiness(event, "注册消息")
     }
 
     /**
@@ -213,6 +215,7 @@ export class MessageManager {
      * @param args(any)          事件参数
      */
     dispatchEvent(event: string, ...args: any) {
+        Logger.logBusiness(event, "触发消息")
         let list = this.events.get(event);
 
         if (list != null) {
@@ -220,6 +223,7 @@ export class MessageManager {
             let length = eds.length;
             for (let i = 0; i < length; i++) {
                 let eventBin = eds[i];
+                Logger.logBusiness(eventBin, "收到消息")
                 eventBin.listener.call(eventBin.object, event, ...args);
             }
         }

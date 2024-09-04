@@ -14,11 +14,16 @@ export class Main extends Root {
         oops.language.setLanguage("zh", () => {
             oops.res.loadDir("common", () => {//加载resources/common的加载动画提示消息组件
                 //oops.gui.toast("toast测试");
-                oops.gui.init(UIConfigData);
-                oops.gui.open(UIID.HotUp)
+                Promise.all([
+                    cardsmgr.Init()
+                ]).then(() => {
+                    oops.gui.init(UIConfigData);
+                    oops.gui.open(UIID.HotUp)
+                })
+
             });
         });
-        cardsmgr.Init()
+
     }
 
     update(deltaTime: number) {

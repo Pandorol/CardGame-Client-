@@ -19,6 +19,12 @@ export class UILoginView extends Component {
         this.editpas.string = oops.storage.get("userpassword", "")
         this.editnickname.string = oops.storage.get("usernickname", "")
         oops.gui.open(UIID.MoveTest2)
+
+
+        // this.editaccount.string = "xxx9"
+        // this.editpas.string = "xxx"
+        // this.onClickLogin()
+
     }
 
     onClickReg() {

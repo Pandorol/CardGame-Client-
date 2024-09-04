@@ -1,12 +1,28 @@
 [
-  {
-    "cardid": 1,
-    "name": "士兵",
-    "story": "普通士兵",
-    "atk": 5,
-    "dfc": 3,
-    "hp": 10,
-    "type": 1,
-    "atkdis": 1
-  }
+    {
+        "cardid": 1,
+        "name": "士兵",
+        "story": "近战士兵",
+        "atk": 45.0,
+        "dfs": 20.0,
+        "hp": 120.0,
+        "atkrange": 1,
+        "type": 1,
+        "atkratio": 0.1,
+        "atkdratio": 1.2,
+        "skills": "[0]"
+    },
+    {
+        "cardid": 2,
+        "name": "弓手",
+        "story": "远程弓手",
+        "atk": 40.0,
+        "dfs": 10.0,
+        "hp": 100.0,
+        "atkrange": 2,
+        "type": 1,
+        "atkratio": 0.2,
+        "atkdratio": 1.5,
+        "skills": "[0]"
+    }
 ]
