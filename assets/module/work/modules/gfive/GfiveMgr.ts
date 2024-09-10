@@ -1,7 +1,12 @@
 import { oops } from '../../../core/Oops';
 import { EventMessage_work } from '../../event/EventMessage_work';
 import { UIID } from '../../ui/UIConfig';
-
+export enum ActionMode {
+    move = 1,
+    atk = 2,
+    dfs = 3,
+    ready = 4,
+}
 export class GfiveMgr {
     roomid
     players = {}
@@ -42,15 +47,11 @@ export class GfiveMgr {
         oops.message.dispatchEvent(EventMessage_work.SetRoomUsers)
     }
     RecvStartAct(cmd, msg) {
-        if (msg.code == 0) {
-            oops.gui.open(UIID.Gfive)
-            oops.gui.remove(UIID.Room)
-            oops.gui.remove(UIID.Rooms)
-        }
-        else {
-            oops.log.logBusiness(msg)
-            oops.gui.toast("errorcode:" + msg.code)
-        }
+
+        oops.gui.open(UIID.Gfive2, msg)
+        oops.gui.remove(UIID.Room)
+        oops.gui.remove(UIID.Rooms)
+
     }
 }
 export var gfivemgr: GfiveMgr = new GfiveMgr()

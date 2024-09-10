@@ -1,42 +1,39 @@
-
 import { _decorator, Component, EventTouch, Node, NodeEventType, UITransform, v3, Vec3 } from 'cc';
-import { UIMoveDot2 } from './UIMoveDot2';
+import { ActionMode } from '../../modules/gfive/GfiveMgr';
+import { uigfiveblock } from './uigfiveblock';
 const { ccclass, property } = _decorator;
 
-enum ActionMode {
-    move = 1,
-    atk = 2,
-    dfs = 3,
-    ready = 4,
-}
-@ccclass('UIMoveTestView2')
-export class UIMoveTestView2 extends Component {
+@ccclass('UIGfiveView2')
+export class UIGfiveView2 extends Component {
     @property(Node)
     mLayout: Node = null
-    @property(UIMoveDot2)
-    mboots: UIMoveDot2[] = []
+    @property(uigfiveblock)
+    mblocks: uigfiveblock[] = []
 
-    mbootsfind = {}
+    mblocksfind = {}
 
     actionMode = ActionMode.move
+    onAdded(msg) {
+        console.log(msg)
+    }
     start() {
-        for (let i = 0; i < this.mboots.length; i++) {
+        for (let i = 0; i < this.mLayout.children.length; i++) {
             let X = Math.floor(i / 7) + 1
             let Y = Math.floor(i % 7) + 1
-            this.mboots[i].mTagX = X
-            this.mboots[i].mTagY = Y
-            if (!this.mbootsfind[X]) {
-                this.mbootsfind[X] = {}
+            let block = this.mLayout.children[i].getComponent(uigfiveblock)
+            block.mTagX = X
+            block.mTagY = Y
+            block.mpos = i
+            if (!this.mblocksfind[X]) {
+                this.mblocksfind[X] = {}
             }
-            this.mbootsfind[X][Y] = this.mboots[i]
+            this.mblocksfind[X][Y] = block
         }
         this.mLayout.on(NodeEventType.TOUCH_START, this.OnTouchStart, this)
         this.mLayout.on(NodeEventType.TOUCH_MOVE, this.OnTouchMove, this)
         this.mLayout.on(NodeEventType.TOUCH_END, this.OnTouchEnd, this)
         this.mLayout.on(NodeEventType.TOUCH_CANCEL, this.OnTouchCancel, this)
     }
-
-
 
     update(deltaTime: number) {
 
@@ -66,16 +63,20 @@ export class UIMoveTestView2 extends Component {
 
     }
     onMoveAction() {
-        if (this.endnode.children[0]) { return }
+        if (this.endnode.children[0]) { this.onMoveAtkAction(); return }
         let nd = this.startnode.children[0]
         if (!nd) { return }
         if (this.getStartEndNodesDis() > 1) { return }
+
         nd.removeFromParent()
         nd.setParent(this.endnode)
     }
+    onMoveAtkAction() {
+
+    }
     getStartEndNodesDis() {
-        let startdot: UIMoveDot2 = this.startnode.getComponent(UIMoveDot2)
-        let enddot: UIMoveDot2 = this.endnode.getComponent(UIMoveDot2)
+        let startdot: uigfiveblock = this.startnode.getComponent(uigfiveblock)
+        let enddot: uigfiveblock = this.endnode.getComponent(uigfiveblock)
         return Math.abs(startdot.mTagX - enddot.mTagX) + Math.abs(startdot.mTagY - enddot.mTagY)
     }
     OnTouchCancel(ev) {
@@ -83,8 +84,8 @@ export class UIMoveTestView2 extends Component {
         this.endnode = null
     }
     getTouchInboot(touchPos) {
-        for (let i = 0; i < this.mboots.length; i++) {
-            let nd = this.mboots[i].node
+        for (let i = 0; i < this.mLayout.children.length; i++) {
+            let nd = this.mLayout.children[i]
             let uiTF: UITransform = nd.getComponent(UITransform);
             let nodePos: Vec3 = uiTF.convertToNodeSpaceAR(v3(touchPos.x, touchPos.y, 0));
             if (nodePos.x > -uiTF.width / 2 && nodePos.y > -uiTF.height / 2 && nodePos.x < uiTF.width / 2 && nodePos.y < uiTF.height / 2) {

@@ -1,6 +1,7 @@
 import { Socket } from "socket.io-client";
 import io from "socket.io-client/dist/socket.io.js";
 import { Logger } from "../../core/common/log/Logger";
+import { oops } from '../../core/Oops';
 import { MessageFunc, NetData } from "./NetInterface";
 export class WebSimpleIO {
     private _sio: Socket | null = null;
@@ -40,6 +41,7 @@ export class WebSimpleIO {
             }
         });
         this._sio.on("message", (msg) => {
+            oops.gui.waitClose()
             this.onMessage.call(null, msg);
         });
         return true;
@@ -48,7 +50,10 @@ export class WebSimpleIO {
         this._sio.disconnect();
     }
 
-    send(buffer: NetData, msgid = "message") {
+    send(buffer: NetData, msgid = "message", wait = true) {
+        if (wait) {
+            oops.gui.waitOpen()
+        }
         this._sio.emit(msgid, buffer)
     }
 
