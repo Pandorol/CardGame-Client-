@@ -18,13 +18,14 @@ export class UILoginView extends Component {
         this.editaccount.string = oops.storage.get("useraccount", "")
         this.editpas.string = oops.storage.get("userpassword", "")
         this.editnickname.string = oops.storage.get("usernickname", "")
-        oops.gui.open(UIID.MoveTest2)
 
 
+        //oops.gui.open(UIID.MoveTest2)
+        //netChannel.gfiveJoin('roomid49', 64)
         // this.editaccount.string = "xxx9"
         // this.editpas.string = "xxx"
         // this.onClickLogin()
-
+        this.onClickOpenMain()
     }
 
     onClickReg() {
@@ -69,6 +70,7 @@ export class UILoginView extends Component {
         netChannel.chatConnect()
         oops.gui.open(UIID.Main)
         oops.gui.removeByNode(this.node)
+        netChannel.gfiveJoin('roomid49', 64)
     }
     update(deltaTime: number) {
 

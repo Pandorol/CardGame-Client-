@@ -20,6 +20,12 @@ export enum Cmd {
     readystatus = "readystatus",
     kickpos = "kickpos",
     atpos = "atpos",
+    cardmove = "cardmove",
+    toast = "toast",
+    endturn = "endturn",
+    actatkcard = "actatkcard",
+    actatkflag = "actatkflag",
+    loser = "loser",
 }
 export class ChatNetListener {
     onMessage(msg) {

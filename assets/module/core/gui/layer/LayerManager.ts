@@ -98,6 +98,7 @@ export class LayerManager {
      */
     init(configs: { [key: number]: UIConfig }): void {
         this.configs = configs;
+        this.notify.createwait()
     }
 
     /**

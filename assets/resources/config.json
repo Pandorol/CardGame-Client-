@@ -2,8 +2,8 @@
     "config": {
         "version": "",
         "package": "",
-        "chaturl": "ws://192.168.3.22:3000",
-        "gfiveurl": "ws://8.138.172.203:3001",
+        "chaturl": "ws://8.138.172.203:3000",
+        "gfiveurl": "ws://192.168.3.22:3001",
         "localDataKey": "aa",
         "localDataIv": "bb",
         "httpServer": "http://8.138.172.203:8084",

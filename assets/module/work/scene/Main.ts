@@ -19,6 +19,7 @@ export class Main extends Root {
                 ]).then(() => {
                     oops.gui.init(UIConfigData);
                     oops.gui.open(UIID.HotUp)
+                    //oops.gui.
                 })
 
             });

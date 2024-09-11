@@ -13,9 +13,7 @@ export class UIGfiveView2 extends Component {
     mblocksfind = {}
 
     actionMode = ActionMode.move
-    onAdded(msg) {
-        console.log(msg)
-    }
+
     start() {
         for (let i = 0; i < this.mLayout.children.length; i++) {
             let X = Math.floor(i / 7) + 1
@@ -68,8 +66,9 @@ export class UIGfiveView2 extends Component {
         if (!nd) { return }
         if (this.getStartEndNodesDis() > 1) { return }
 
-        nd.removeFromParent()
-        nd.setParent(this.endnode)
+
+        //nd.removeFromParent()
+        //nd.setParent(this.endnode)
     }
     onMoveAtkAction() {
 

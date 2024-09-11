@@ -27,6 +27,7 @@ export class LayerNotify extends Node {
         widget.alignMode = 2;
         widget.enabled = true;
         this.init();
+
     }
 
     private init() {
@@ -35,6 +36,10 @@ export class LayerNotify extends Node {
         this.black.enabled = false;
     }
 
+    createwait() {
+        if (this.wait == null) this.wait = ViewUtil.createPrefabNode(WaitPrefabPath);
+
+    }
     /** 打开等待提示 */
     waitOpen() {
         if (this.wait == null) this.wait = ViewUtil.createPrefabNode(WaitPrefabPath);
