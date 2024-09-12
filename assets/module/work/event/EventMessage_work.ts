@@ -16,5 +16,6 @@ export enum EventMessage_work {
     UserAtPos = "UserAtPos",
     NewOwner = "NewOwner",
 
-    LoginDatasSetted = "LoginDatasSetted"
+    LoginDatasSetted = "LoginDatasSetted",
+    SetRoomActData = "SetRoomActData"
 }

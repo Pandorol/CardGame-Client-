@@ -1,4 +1,4 @@
-import { _decorator, Component, EventTouch, Node, NodeEventType, UITransform, v3, Vec3 } from 'cc';
+import { _decorator, Component, EventTouch, Node, NodeEventType, Prefab, UITransform, v3, Vec3 } from 'cc';
 import { ActionMode } from '../../modules/gfive/GfiveMgr';
 import { uigfiveblock } from './uigfiveblock';
 const { ccclass, property } = _decorator;
@@ -9,6 +9,8 @@ export class UIGfiveView2 extends Component {
     mLayout: Node = null
     @property(uigfiveblock)
     mblocks: uigfiveblock[] = []
+    @property(Prefab)
+    mcardfab: Prefab = null
 
     mblocksfind = {}
 
@@ -31,6 +33,7 @@ export class UIGfiveView2 extends Component {
         this.mLayout.on(NodeEventType.TOUCH_MOVE, this.OnTouchMove, this)
         this.mLayout.on(NodeEventType.TOUCH_END, this.OnTouchEnd, this)
         this.mLayout.on(NodeEventType.TOUCH_CANCEL, this.OnTouchCancel, this)
+
     }
 
     update(deltaTime: number) {
@@ -93,6 +96,7 @@ export class UIGfiveView2 extends Component {
         }
         return null
     }
+
 }
 
 

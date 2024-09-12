@@ -161,4 +161,15 @@ export class ViewUtil {
         anim.createState(clip, clip!.name);
         anim.play(clip!.name);
     }
+    static remdestory(nd: Node) {
+        nd.removeFromParent()
+        nd.destroy()
+    }
+    static remdestoryAllChildren(nd: Node) {
+        for (let i = nd.children.length - 1; i >= 0; i--) {
+            let ndd = nd.children[i]
+            ndd.removeFromParent()
+            ndd.destroy()
+        }
+    }
 }

@@ -29,8 +29,9 @@ export enum Cmd {
 }
 export class ChatNetListener {
     onMessage(msg) {
+
         let cmd = msg.cmd;
-        oops.log.logNet(msg)
+
         switch (cmd) {
             case Cmd.test1:
                 oops.message.dispatchEvent(cmd + '', msg)
@@ -58,7 +59,7 @@ export class ChatNetListener {
 export class GfiveNetListener {
     onMessage(msg) {
         let cmd = msg.cmd;
-        oops.log.logNet(msg)
+
         switch (cmd) {
             case Cmd.test1:
                 oops.message.dispatchEvent(cmd + '', msg)

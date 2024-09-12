@@ -42,10 +42,10 @@ export class GfiveMgr {
         oops.message.dispatchEvent(EventMessage_work.SetRoomUsers)
     }
     RecvRoomDatas(cmd, msg) {
-        this.roomid = msg.datas.roomid
-        this.players = msg.datas.playerList
-        this.owner = msg.datas.owner
-        if (msg.roomdata.actdata) {
+        this.roomid = msg.roomdatas.roomid
+        this.players = msg.roomdatas.playerList
+        this.owner = msg.roomdatas.owner
+        if (msg.roomdatas.actdata) {
             this.SetRoomActData(msg)
         }
         oops.message.dispatchEvent(EventMessage_work.SetRoomUsers)
@@ -64,26 +64,29 @@ export class GfiveMgr {
         oops.gui.remove(UIID.Room)
         oops.gui.remove(UIID.Rooms)
 
-        this.roomid = msg.roomdata.roomid
-        this.players = msg.roomdata.playerList
-        this.owner = msg.roomdata.owner
+        this.roomid = msg.roomdatas.roomid
+        this.players = msg.roomdatas.playerList
+        this.owner = msg.roomdatas.owner
         this.SetRoomActData(msg)
     }
     SetRoomActData(msg) {
-        this.turn = msg.roomdata.actdata.turn
-        this.sumturn = msg.roomdata.actdata.sumturn
-        this.leftsteps = msg.roomdata.actdata.leftsteps
-        this.center = msg.roomdata.actdata.center
-        this.actmap = msg.roomdata.actdata.actmap
+        this.turn = msg.roomdatas.actdata.turn
+        this.sumturn = msg.roomdatas.actdata.sumturn
+        this.leftsteps = msg.roomdatas.actdata.leftsteps
+        this.center = msg.roomdatas.actdata.center
+        this.actmap = msg.roomdatas.actdata.actmap
         Object.values(this.actmap).forEach((card: any) => {
             let cardid = card.cardid
             if (cardid) {
                 Object.keys(cardsmgr.cards[cardid]).forEach((key) => {
-                    card[key] = cardsmgr.cards[cardid][key]
+                    if (!(key in card)) {
+                        card[key] = cardsmgr.cards[cardid][key]
+                    }
                 })
             }
         })
         oops.log.logBusiness(this.actmap)
+        oops.message.dispatchEvent(EventMessage_work.SetRoomActData)
     }
 
     SendMove(coststep, cardpos, targetpos) {

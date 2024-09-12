@@ -41,7 +41,9 @@ export class WebSimpleIO {
             }
         });
         this._sio.on("message", (msg) => {
+            oops.log.logNet(msg, "revc")
             oops.gui.waitClose()
+
             this.onMessage.call(null, msg);
         });
         return true;
@@ -54,6 +56,7 @@ export class WebSimpleIO {
         if (wait) {
             oops.gui.waitOpen()
         }
+        oops.log.logNet(buffer, "send")
         this._sio.emit(msgid, buffer)
     }
 
