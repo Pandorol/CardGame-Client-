@@ -1,16 +1,11 @@
 import { oops } from '../../../core/Oops';
 import { EventMessage_work } from '../../event/EventMessage_work';
-import { netChannel } from '../../net/NetChannelManager';
-import { Cmd } from '../../net/NetListener';
 import { UIID } from '../../ui/UIConfig';
 import { cardsmgr } from '../cards/CardDatas';
-export enum ActionMode {
-    move = 1,
-    atk = 2,
-    dfs = 3,
-    ready = 4,
-}
+import { userdt } from '../user/UserDatas';
+
 export class GfiveMgr {
+    //3部分，数据，数据方法，消息过渡
     roomid
     players = {}
     owner
@@ -20,6 +15,19 @@ export class GfiveMgr {
     sumturn = 0
     leftsteps = 0
 
+    IsMyTurn() {
+        if (this.players[userdt.userid].data.team == this.turn) {
+            return true
+        }
+        return false
+    }
+    GetTeam(userid) {
+        return this.players[userid].data.team
+    }
+
+
+
+
     init() {
         oops.message.on(EventMessage_work.UserJoinRoom, this.RecvUserJoinRoom, this)
         oops.message.on(EventMessage_work.ReUserJoinRoom, this.RecvReUserJoinRoom, this)
@@ -27,11 +35,13 @@ export class GfiveMgr {
         oops.message.on(EventMessage_work.UserLeaveRoom, this.RecvUserLeaveRoom, this)
         oops.message.on(EventMessage_work.NewOwner, this.NewOwner, this)
         oops.message.on(EventMessage_work.StartAct, this.RecvStartAct, this)
+        oops.message.on(EventMessage_work.EndTurn, this.RecvEndTurn, this)
+        oops.message.on(EventMessage_work.CardMove, this.RecvCardMove, this)
     }
     RecvReUserJoinRoom(cmd, msg) {
         this.players[msg.userid] = msg.player
         oops.message.dispatchEvent(EventMessage_work.SetRoomUsers)
-        oops.gui.open(UIID.Gfive)
+        oops.gui.open(UIID.Gfive2)
         oops.gui.remove(UIID.Room)
         oops.gui.remove(UIID.Rooms)
     }
@@ -45,7 +55,7 @@ export class GfiveMgr {
         this.roomid = msg.roomdatas.roomid
         this.players = msg.roomdatas.playerList
         this.owner = msg.roomdatas.owner
-        if (msg.roomdatas.actdata) {
+        if (Object.keys(msg.roomdatas.actdata).length > 0) {
             this.SetRoomActData(msg)
         }
         oops.message.dispatchEvent(EventMessage_work.SetRoomUsers)
@@ -88,19 +98,19 @@ export class GfiveMgr {
         oops.log.logBusiness(this.actmap)
         oops.message.dispatchEvent(EventMessage_work.SetRoomActData)
     }
-
-    SendMove(coststep, cardpos, targetpos) {
-        netChannel.chat.send({
-            cmd: Cmd.cardmove,
-            coststep: coststep,
-            cardpos: cardpos,
-            targetpos: targetpos,
-        })
+    RecvEndTurn(cmd, msg) {
+        this.turn = msg.turn
+        this.sumturn = msg.sumturn
+        this.leftsteps = msg.leftsteps
+        oops.message.dispatchEvent(EventMessage_work.SetRoomEndTurn)
     }
-
-
-
-
+    RecvCardMove(cmd, msg) {
+        this.turn = msg.turn
+        this.leftsteps = msg.leftsteps
+        this.actmap[msg.targetpos] = this.actmap[msg.cardpos]
+        delete this.actmap[msg.cardpos]
+        oops.message.dispatchEvent(EventMessage_work.SetCardMove, msg)
+    }
 
 }
 export var gfivemgr: GfiveMgr = new GfiveMgr()

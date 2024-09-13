@@ -36,6 +36,9 @@ export class ChatNetListener {
             case Cmd.test1:
                 oops.message.dispatchEvent(cmd + '', msg)
                 break;
+            case Cmd.toast:
+                oops.gui.toast(msg.msg);
+                break;
             case Cmd.ChatMsg:
                 oops.message.dispatchEvent(EventMessage_work.RecvChatMsg, msg)
                 break;
@@ -64,6 +67,9 @@ export class GfiveNetListener {
             case Cmd.test1:
                 oops.message.dispatchEvent(cmd + '', msg)
                 break;
+            case Cmd.toast:
+                oops.gui.toast(msg.msg);
+                break;
             case Cmd.joinroomsuc:
                 oops.message.dispatchEvent(EventMessage_work.UserJoinRoom, msg)
                 break;
@@ -84,6 +90,12 @@ export class GfiveNetListener {
                 break;
             case Cmd.newOwner:
                 oops.message.dispatchEvent(EventMessage_work.NewOwner, msg)
+                break;
+            case Cmd.endturn:
+                oops.message.dispatchEvent(EventMessage_work.EndTurn, msg)
+                break;
+            case Cmd.cardmove:
+                oops.message.dispatchEvent(EventMessage_work.CardMove, msg)
                 break;
             default:
                 break;

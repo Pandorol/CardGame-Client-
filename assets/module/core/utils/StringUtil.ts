@@ -211,4 +211,7 @@ export class StringUtil {
 
         return str;
     }
+    static simpleJstr(str: string) {
+        return str.replace(/\,|\:|\"|\{|\}/g, "")
+    }
 }

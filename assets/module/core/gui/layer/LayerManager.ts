@@ -159,6 +159,7 @@ export class LayerManager {
     oops.gui.open(UIID.Loading, null, uic);
      */
     open(uiId: number, uiArgs: any = null, callbacks?: UICallbacks): void {
+        console.log("open uiid:" + uiId)
         var config = this.configs[uiId];
         if (config == null) {
             warn(`打开编号为【${uiId}】的界面失败，配置信息不存在`);

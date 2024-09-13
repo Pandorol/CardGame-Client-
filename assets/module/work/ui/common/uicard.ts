@@ -14,6 +14,8 @@ export class uicard extends Component {
     setInfo(cardid) {
         this.data = cardsmgr.cards[cardid]
         this.mName.string = this.data.name
+
+
     }
     update(deltaTime: number) {
 

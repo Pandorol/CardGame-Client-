@@ -15,7 +15,13 @@ export enum EventMessage_work {
     StartAct = "StartAct",
     UserAtPos = "UserAtPos",
     NewOwner = "NewOwner",
+    EndTurn = "EndTurn",
+    CardMove = "CardMove",
 
     LoginDatasSetted = "LoginDatasSetted",
-    SetRoomActData = "SetRoomActData"
+    SetRoomActData = "SetRoomActData",
+    SetRoomEndTurn = "SetRoomEndTurn",
+    SetCardMove = "SetCardMove",
+    OnClickCard = "OnClickCard"
+
 }

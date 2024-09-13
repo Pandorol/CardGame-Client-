@@ -27,5 +27,12 @@
     "loading_load_game": "加载游戏内容",
     "loading_load_player": "获取用户信息",
     "curnumusers": "当前用户人数：%{0}",
-    "nomore": "没有更多了"
+    "nomore": "没有更多了",
+    "noyourturn": "不是你的回合",
+    "nosteps": "没有行动点了",
+    "nomoverange": "超出移动范围",
+    "nocardowner": "你不是这张卡的主人",
+    "leftsteps": "剩余点数：",
+    "HP": "HP:",
+    "turnend": "回合结束"
 }

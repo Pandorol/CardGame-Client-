@@ -70,6 +70,8 @@ export class UILoginView extends Component {
         netChannel.chatConnect()
         oops.gui.open(UIID.Main)
         oops.gui.removeByNode(this.node)
+
+        userdt.userid = 64 + ''
         netChannel.gfiveJoin('roomid49', 64)
     }
     update(deltaTime: number) {

@@ -1,5 +1,6 @@
 import { _decorator, Component, EventTouch, Node, NodeEventType, Prefab, UITransform, v3, Vec3 } from 'cc';
-import { ActionMode } from '../../modules/gfive/GfiveMgr';
+
+import { commonTouchActions } from '../common/commonTouchActions';
 import { uigfiveblock } from './uigfiveblock';
 const { ccclass, property } = _decorator;
 
@@ -14,7 +15,7 @@ export class UIGfiveView2 extends Component {
 
     mblocksfind = {}
 
-    actionMode = ActionMode.move
+
 
     start() {
         for (let i = 0; i < this.mLayout.children.length; i++) {
@@ -39,52 +40,75 @@ export class UIGfiveView2 extends Component {
     update(deltaTime: number) {
 
     }
-    startnode = null
-    endnode = null
+    mstartnode = null
+    mnodestartcard = null
+    mendnode = null
+    mnodeendcard = null
     OnTouchStart(ev: EventTouch) {
         let touchPos = ev.getUILocation()
-        this.startnode = this.getTouchInboot(touchPos)
+        this.mstartnode = this.getTouchInboot(touchPos)
+        this.mnodestartcard = this.mstartnode.children[0]
+        if (this.mnodestartcard) {
+            let touchactions = this.mnodestartcard.getComponent(commonTouchActions)
+            if (touchactions) {
+                touchactions.onTouchStart()
+            }
+        }
     }
     OnTouchMove(ev) {
-
+        if (this.mnodestartcard) {
+            let touchactions = this.mnodestartcard.getComponent(commonTouchActions)
+            if (touchactions) {
+                touchactions.onTouchMove()
+            }
+        }
     }
     OnTouchEnd(ev) {
-        if (!this.startnode) { return }
+        if (!this.mnodestartcard) { return }
         let touchPos = ev.getUILocation()
-        this.endnode = this.getTouchInboot(touchPos)
-        if (!this.endnode) { return }
+        this.mendnode = this.getTouchInboot(touchPos)
 
-        if (this.actionMode == ActionMode.move) {
-            this.onMoveAction()
-            //oops.gui.toast("")
-        }
-        else if (this.actionMode == ActionMode.ready) {
-
+        if (this.mnodestartcard) {
+            let touchactions = this.mnodestartcard.getComponent(commonTouchActions)
+            if (touchactions) {
+                touchactions.onTouchEnd(ev, this.mendnode)
+            }
         }
 
-    }
-    onMoveAction() {
-        if (this.endnode.children[0]) { this.onMoveAtkAction(); return }
-        let nd = this.startnode.children[0]
-        if (!nd) { return }
-        if (this.getStartEndNodesDis() > 1) { return }
 
 
-        //nd.removeFromParent()
-        //nd.setParent(this.endnode)
-    }
-    onMoveAtkAction() {
+        if (!this.mendnode) { return }
+        this.mnodeendcard = this.mendnode.children[0]
+        if (this.mnodeendcard) {
+            let touchactions = this.mnodeendcard.getComponent(commonTouchActions)
+            if (touchactions) {
+                touchactions.onBeEndTouched(ev, this.mnodestartcard)
+            }
+        }
+        // if (this.actionMode == ActionMode.move) {
+        //     this.onMoveAction()
+        //     //oops.gui.toast("")
+        // }
+        // else if (this.actionMode == ActionMode.ready) {
 
-    }
-    getStartEndNodesDis() {
-        let startdot: uigfiveblock = this.startnode.getComponent(uigfiveblock)
-        let enddot: uigfiveblock = this.endnode.getComponent(uigfiveblock)
-        return Math.abs(startdot.mTagX - enddot.mTagX) + Math.abs(startdot.mTagY - enddot.mTagY)
+        // }
+
     }
     OnTouchCancel(ev) {
-        this.startnode = null
-        this.endnode = null
+        if (this.mnodestartcard) {
+            let touchactions = this.mnodestartcard.getComponent(commonTouchActions)
+            if (touchactions) {
+                touchactions.onTouchCancel()
+            }
+        }
+        this.mstartnode = null
+        this.mendnode = null
+        this.mnodestartcard = null
+        this.mnodeendcard = null
     }
+
+
+
     getTouchInboot(touchPos) {
         for (let i = 0; i < this.mLayout.children.length; i++) {
             let nd = this.mLayout.children[i]
