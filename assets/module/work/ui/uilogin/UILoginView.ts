@@ -20,12 +20,8 @@ export class UILoginView extends Component {
         this.editnickname.string = oops.storage.get("usernickname", "")
 
 
-        //oops.gui.open(UIID.MoveTest2)
-        //netChannel.gfiveJoin('roomid49', 64)
-        // this.editaccount.string = "xxx9"
-        // this.editpas.string = "xxx"
-        // this.onClickLogin()
-        this.onClickOpenMain()
+
+        //this.onClickOpenMain()
     }
 
     onClickReg() {
@@ -71,8 +67,8 @@ export class UILoginView extends Component {
         oops.gui.open(UIID.Main)
         oops.gui.removeByNode(this.node)
 
-        userdt.userid = 64 + ''
-        netChannel.gfiveJoin('roomid49', 64)
+        // userdt.userid = 64 + ''
+        // netChannel.gfiveJoin('roomid49', 64)
     }
     update(deltaTime: number) {
 
