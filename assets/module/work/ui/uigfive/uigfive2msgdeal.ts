@@ -46,6 +46,7 @@ export class uigfive2msgdeal extends Component {
         //let actmapkeys = Object.keys(gfivemgr.actmap)
 
         for (let i = 0; i < gf.mLayout.children.length; i++) {
+            if (i == 24) { continue }
             let block = gf.mLayout.children[i]
             if (!(i in gfivemgr.actmap)) {
                 ViewUtil.remdestoryAllChildren(block)
@@ -70,6 +71,7 @@ export class uigfive2msgdeal extends Component {
                 }
             }
         }
+        gf.mCenter.setInfo(gfivemgr.center)
         this.SetCtrls()
     }
 

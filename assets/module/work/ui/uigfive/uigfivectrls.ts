@@ -13,6 +13,8 @@ export class uigfivectrls extends Component {
     mLeftSteps: Label[] = []
     @property(Label)
     mlbDetails: Label = null
+
+
     start() {
 
     }

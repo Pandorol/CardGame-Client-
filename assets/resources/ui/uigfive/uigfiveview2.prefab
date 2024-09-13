@@ -10924,6 +10924,7 @@
       "__uuid__": "d2b2ced9-4b1e-48d3-92bc-58796ce61e5a",
       "__expectedType__": "cc.Prefab"
     },
+    "mCenter": null,
     "_id": ""
   },
   {
@@ -10996,11 +10997,37 @@
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
     "instance": null,
-    "targetOverrides": null,
+    "targetOverrides": [
+      {
+        "__id__": 518
+      }
+    ],
     "nestedPrefabInstanceRoots": [
       {
         "__id__": 204
       }
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 511
+    },
+    "sourceInfo": null,
+    "propertyPath": [
+      "mCenter"
+    ],
+    "target": {
+      "__id__": 204
+    },
+    "targetInfo": {
+      "__id__": 519
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "9fburEmtZI6KbjKZ63/gdC"
     ]
   }
 ]

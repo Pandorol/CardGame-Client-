@@ -2,6 +2,7 @@ import { _decorator, Component, EventTouch, Node, NodeEventType, Prefab, UITrans
 
 import { commonTouchActions } from '../common/commonTouchActions';
 import { uigfiveblock } from './uigfiveblock';
+import { uigfivecenter } from './uigfivecenter';
 const { ccclass, property } = _decorator;
 
 @ccclass('UIGfiveView2')
@@ -13,6 +14,8 @@ export class UIGfiveView2 extends Component {
     @property(Prefab)
     mcardfab: Prefab = null
 
+    @property(uigfivecenter)
+    mCenter: uigfivecenter = null
     mblocksfind = {}
 
 
