@@ -34,6 +34,7 @@ export class UIRoomView extends Component {
     }
     update(deltaTime: number) {
 
+
     }
     onBeforeRemove() {
         oops.message.offAll(this)
