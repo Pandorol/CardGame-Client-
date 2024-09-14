@@ -13,8 +13,9 @@ import { uigfivecard } from '../uigfive/uigfivecard';
 import { uigfivecenter } from '../uigfive/uigfivecenter';
 const { ccclass, property } = _decorator;
 
-@ccclass('cTouchAction1')
-export class cTouchAction1 extends commonTouchActions {
+@ccclass('cTouchAction2')
+export class cTouchAction2 extends commonTouchActions {
+
     atkcost = 1
     movecost = 1
     onTouchStart(ev: EventTouch, ...params: any) {
@@ -49,7 +50,9 @@ export class cTouchAction1 extends commonTouchActions {
         if (endnode.children[0]) {
             let targetcard: uigfivecard = endnode.children[0].getComponent(uigfivecard)
 
+
             let nodedis = gfiveblockutils.getStartEndNodesDis(startnode, endnode)
+
             if (nodedis > startcard.data.atkrange) {
                 oops.gui.toast(LanguageData.getLangByID("noatkrange"))
                 return
@@ -94,8 +97,6 @@ export class cTouchAction1 extends commonTouchActions {
     onBeEndTouched(ev: EventTouch, ...params: any) {
 
     }
-
-
 }
 
 

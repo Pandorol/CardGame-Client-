@@ -1,11 +1,12 @@
-import { _decorator, Component, instantiate, Layout, Node } from 'cc';
+import { _decorator, Component, instantiate, Layout } from 'cc';
 import { oops } from '../../../core/Oops';
 import { ViewUtil } from '../../../core/utils/ViewUtil';
 import { LanguageData } from '../../../libs/gui/language/LanguageData';
 import { EventMessage_work } from '../../event/EventMessage_work';
 import { gfivemgr } from '../../modules/gfive/GfiveMgr';
 import { userdt } from '../../modules/user/UserDatas';
-import { cTouchAction1 } from '../cardactions/cTouchAction1';
+import { UIID } from '../UIConfig';
+import { addTouchActions } from '../common/addTouchActions';
 import { commonTouchActions } from '../common/commonTouchActions';
 import { UIGfiveView2 } from './UIGfiveView2';
 import { uigfivecard } from './uigfivecard';
@@ -24,6 +25,9 @@ export class uigfive2msgdeal extends Component {
         oops.message.on(EventMessage_work.SetRoomActData, this.SetRoomActData, this)
         oops.message.on(EventMessage_work.SetRoomEndTurn, this.SetRoomEndTurn, this)
         oops.message.on(EventMessage_work.SetCardMove, this.SetCardMove, this)
+        oops.message.on(EventMessage_work.RefreshAtk2Cards, this.RefreshAtk2Cards, this)
+        oops.message.on(EventMessage_work.SetAtkFlag, this.SetAtkFlag, this)
+        oops.message.on(EventMessage_work.SetEndAct, this.SetEndAct, this)
     }
     SetClickCard(event, msg) {
         let ctrls: uigfivectrls = this.node.getComponent(uigfivectrls)
@@ -52,29 +56,33 @@ export class uigfive2msgdeal extends Component {
                 ViewUtil.remdestoryAllChildren(block)
             }
             else {
-                if (!block.children[0]) {
-                    let nd = instantiate(gf.mcardfab)
-                    nd.setParent(block)
+                this.AddOrSetCarrd(block, gfivemgr.actmap[i])
 
-                    nd.getComponent(uigfivecard).setInfo(gfivemgr.actmap[i])
-                    if (!nd.getComponent(commonTouchActions)) {
-                        this.AddTouchActions(nd, gfivemgr.actmap[i])
-                    }
-
-                }
-                else {
-                    let nd = block.children[0]
-                    nd.getComponent(uigfivecard).setInfo(gfivemgr.actmap[i])
-                    if (!nd.getComponent(commonTouchActions)) {
-                        this.AddTouchActions(nd, gfivemgr.actmap[i])
-                    }
-                }
             }
         }
         gf.mCenter.setInfo(gfivemgr.center)
         this.SetCtrls()
     }
+    AddOrSetCarrd(blocknode, cardinfo) {
+        let gf: UIGfiveView2 = this.node.getComponent(UIGfiveView2)
+        if (!blocknode.children[0]) {
+            let nd = instantiate(gf.mcardfab)
+            nd.setParent(blocknode)
 
+            nd.getComponent(uigfivecard).setInfo(cardinfo)
+            if (!nd.getComponent(commonTouchActions)) {
+                addTouchActions.AddTouchActions(nd, cardinfo)
+            }
+
+        }
+        else {
+            let nd = blocknode.children[0]
+            nd.getComponent(uigfivecard).setInfo(cardinfo)
+            if (!nd.getComponent(commonTouchActions)) {
+                addTouchActions.AddTouchActions(nd, cardinfo)
+            }
+        }
+    }
     SetRoomEndTurn(event, msg) {
         oops.gui.toast(LanguageData.getLangByID("turnend"))
         this.SetCtrls()
@@ -86,19 +94,51 @@ export class uigfive2msgdeal extends Component {
         movenode.removeFromParent()
         movenode.setParent(gf.mLayout.children[msg.targetpos])
     }
+    RefreshAtk2Cards(event, msg) {
+        this.SetCtrls()
+        oops.gui.toast(LanguageData.getLangByID("actatk"))
 
+        let gf: UIGfiveView2 = this.node.getComponent(UIGfiveView2)
 
+        if (msg.cardposafter != msg.cardposbefore) {
+            ViewUtil.remdestoryAllChildren(gf.mLayout.children[msg.cardposbefore])
+        }
+        if (msg.targrtposafter != msg.targrtposbefore) {
+            ViewUtil.remdestoryAllChildren(gf.mLayout.children[msg.targrtposbefore])
+        }
 
-    AddTouchActions(nd: Node, card) {
-        if (card.cardid == 1) {
-            nd.addComponent(cTouchAction1)
+        if (msg.resultatkcard.alive == 0) {
+            ViewUtil.remdestoryAllChildren(gf.mLayout.children[msg.cardposafter])
         }
         else {
-            nd.addComponent(commonTouchActions)
+            this.AddOrSetCarrd(gf.mLayout.children[msg.cardposafter], msg.resultatkcard)
         }
 
+        if (msg.resulttargetcard.alive == 0) {
+            ViewUtil.remdestoryAllChildren(gf.mLayout.children[msg.targrtposafter])
+        }
+        else {
+            this.AddOrSetCarrd(gf.mLayout.children[msg.targrtposafter], msg.resulttargetcard)
+        }
+
+
+    }
+    SetAtkFlag(event, msg) {
+        //msg.cardpos
+        this.SetCtrls()
+        oops.gui.toast(LanguageData.getLangByID("actflg"))
+        let gf: UIGfiveView2 = this.node.getComponent(UIGfiveView2)
+        gf.mCenter.setInfo(msg.flagcenter)
+
+    }
+    SetEndAct(event, msg) {
+        this.onClickClose()
+        oops.gui.open(UIID.ActEnd)
     }
 
+    onClickClose() {
+        oops.gui.removeByNode(this.node)
+    }
     onBeforeRemove() {
         oops.message.offAll(this)
     }

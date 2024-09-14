@@ -31,8 +31,14 @@
     "noyourturn": "不是你的回合",
     "nosteps": "没有行动点了",
     "nomoverange": "超出移动范围",
+    "noatkrange": "超出攻击范围",
     "nocardowner": "你不是这张卡的主人",
     "leftsteps": "剩余点数：",
     "HP": "HP:",
-    "turnend": "回合结束"
+    "turnend": "回合结束",
+    "actatk": "攻击行为",
+    "actflg": "攻击中心",
+    "youwin": "你赢了",
+    "youlose": "你输了",
+    "noatkself": "不能攻击自己"
 }

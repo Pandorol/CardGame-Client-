@@ -20,6 +20,7 @@ export enum UIID {
     MoveTest,
     MoveTest2,
     ShopCard,
+    ActEnd,
 }
 
 /** 打开界面方式的配置数据 */
@@ -36,6 +37,7 @@ export var UIConfigData: { [key: number]: UIConfig } = {
     [UIID.Room]: { layer: LayerType.UI, prefab: "ui/uirooms/uiroomview" },
     [UIID.Gfive]: { layer: LayerType.UI, prefab: "ui/uigfive/uigfiveview" },
     [UIID.Gfive2]: { layer: LayerType.UI, prefab: "ui/uigfive/uigfiveview2" },
+    [UIID.ActEnd]: { layer: LayerType.UI, prefab: "ui/uigfive/uigfiveendview" },
     [UIID.MoveTest]: { layer: LayerType.UI, prefab: "ui/uimovetest/uimovetestview" },
     [UIID.MoveTest2]: { layer: LayerType.UI, prefab: "ui/uimovetest/uimovetestview2" },
     [UIID.ShopCard]: { layer: LayerType.UI, prefab: "ui/uishop/uishopcardview" },

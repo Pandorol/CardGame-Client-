@@ -15,6 +15,8 @@ export class GfiveMgr {
     sumturn = 0
     leftsteps = 0
 
+    winner = 0
+    enddata = {}
     IsMyTurn() {
         if (this.players[userdt.userid].data.team == this.turn) {
             return true
@@ -37,6 +39,9 @@ export class GfiveMgr {
         oops.message.on(EventMessage_work.StartAct, this.RecvStartAct, this)
         oops.message.on(EventMessage_work.EndTurn, this.RecvEndTurn, this)
         oops.message.on(EventMessage_work.CardMove, this.RecvCardMove, this)
+        oops.message.on(EventMessage_work.ActAtkCard, this.RecvActAtkCard, this)
+        oops.message.on(EventMessage_work.ActAtkFlag, this.RecvActAtkFlag, this)
+        oops.message.on(EventMessage_work.EndAct, this.RecvEndAct, this)
     }
     RecvReUserJoinRoom(cmd, msg) {
         this.players[msg.userid] = msg.player
@@ -111,6 +116,29 @@ export class GfiveMgr {
         delete this.actmap[msg.cardpos]
         oops.message.dispatchEvent(EventMessage_work.SetCardMove, msg)
     }
-
+    RecvActAtkCard(cmd, msg) {
+        this.turn = msg.turn
+        this.leftsteps = msg.leftsteps
+        this.actmap[msg.cardposafter] = msg.resultatkcard
+        if (msg.cardposafter != msg.cardposbefore) {
+            delete this.actmap[msg.cardposbefore]
+        }
+        this.actmap[msg.targrtposafter] = msg.resulttargetcard
+        if (msg.targrtposafter != msg.targrtposbefore) {
+            delete this.actmap[msg.targrtposbefore]
+        }
+        oops.message.dispatchEvent(EventMessage_work.RefreshAtk2Cards, msg)
+    }
+    RecvActAtkFlag(cmd, msg) {
+        this.turn = msg.turn
+        this.leftsteps = msg.leftsteps
+        this.center = msg.flagcenter
+        oops.message.dispatchEvent(EventMessage_work.SetAtkFlag, msg)
+    }
+    RecvEndAct(cmd, msg) {
+        this.enddata = msg.alldamages
+        this.winner = msg.winuser
+        oops.message.dispatchEvent(EventMessage_work.SetEndAct, msg)
+    }
 }
 export var gfivemgr: GfiveMgr = new GfiveMgr()

@@ -97,6 +97,15 @@ export class GfiveNetListener {
             case Cmd.cardmove:
                 oops.message.dispatchEvent(EventMessage_work.CardMove, msg)
                 break;
+            case Cmd.actatkcard:
+                oops.message.dispatchEvent(EventMessage_work.ActAtkCard, msg)
+                break;
+            case Cmd.actatkflag:
+                oops.message.dispatchEvent(EventMessage_work.ActAtkFlag, msg)
+                break;
+            case Cmd.endact:
+                oops.message.dispatchEvent(EventMessage_work.EndAct, msg)
+                break;
             default:
                 break;
         }

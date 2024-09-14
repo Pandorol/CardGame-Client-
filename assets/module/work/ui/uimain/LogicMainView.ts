@@ -10,9 +10,10 @@ export class LogicMainView extends Component {
     @property(Node)
     mDeskCards: Node[] = []
     start() {
+        this.LoginDatasSetted()
         oops.message.on(EventMessage_work.LoginDatasSetted, this.LoginDatasSetted, this)
     }
-    LoginDatasSetted(event, msg) {
+    LoginDatasSetted() {
         oops.log.logBusiness("recvLoginDatasSetted")
         if (!cardsmgr.mydesks) {
             return

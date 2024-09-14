@@ -21,7 +21,7 @@ export class UILoginView extends Component {
 
 
 
-        //this.onClickOpenMain()
+        this.onClickOpenMain()
     }
 
     onClickReg() {
@@ -61,14 +61,21 @@ export class UILoginView extends Component {
         })
     }
     onClickOpenMain() {
+        userdt.userid = 64 + ''
+
         netChannel.chatCreate()
         netChannel.gfiveCreate()
         netChannel.chatConnect()
+
+
+
+        netChannel.gfiveJoin('roomid49', 64)
+
+
         oops.gui.open(UIID.Main)
         oops.gui.removeByNode(this.node)
 
-        // userdt.userid = 64 + ''
-        // netChannel.gfiveJoin('roomid49', 64)
+
     }
     update(deltaTime: number) {
 
