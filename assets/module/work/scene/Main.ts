@@ -17,6 +17,7 @@ export class Main extends Root {
                 Promise.all([
                     cardsmgr.Init()
                 ]).then(() => {
+
                     oops.gui.init(UIConfigData);
                     oops.gui.open(UIID.HotUp)
                     //oops.gui.

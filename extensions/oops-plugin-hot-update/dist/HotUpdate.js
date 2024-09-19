@@ -36,6 +36,10 @@ class HotUpdate {
         var mainScript = fs.readFileSync(mainScriptPath).toString('utf-8');
         mainScript =
             `// ---- 扩展注入热更新脚本开始 ----
+    if (localStorage.getItem('HotUpdateSearchPaths')) {
+        let searchPaths = JSON.parse(localStorage.getItem('HotUpdateSearchPaths'));
+        jsb.fileUtils.setSearchPaths(searchPaths);
+    }
     jsb.fileUtils.addSearchPath(jsb.fileUtils.getWritablePath() + "${storage}", true);
     var fileList = [];
     var storagePath = "${storage}";
